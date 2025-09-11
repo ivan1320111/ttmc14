@@ -1,0 +1,10 @@
+ent-MCAttachmentBayonet = штык
+    .desc = Острое лезвие для крепления на оружие. Может использоваться для колющих ударов вручную по любым целям, кроме намеренного причинения вреда. При установке немного снижает точность стрельбы.
+ent-MCAttachmentRecoilCompensator = компенсатор отдачи
+    .desc = Дульная насадка, уменьшающая отдачу и разброс за счёт отвода пороховых газов вверх. Значительно снижает отдачу и разброс независимо от способа удержания оружия.
+ent-MCAttachmentExtendedMuzzle = удлиненый ствол
+    .desc = Удлинённый ствол обеспечивает уменьшенный разброс, повышенную точность и начальную скорость пули благодаря улучшенной стабилизации и большему воздействию ударной волны.
+ent-MCAttachmentSuppressor = глушитель
+    .desc = A small tube with exhaust ports to expel noise and gas. Does not completely silence a weapon, but does make it much quieter and a little more accurate and stable at the cost of bullet speed.
+ent-MCAttachmentMuzzleCharger = дульный ускоритель
+    .desc = Дульная насадка с миниатюрным кумулятивным зарядом, который значительно ускоряет пулю. Существенно увеличивает скорость снаряда и уменьшает падение урона с расстоянием.

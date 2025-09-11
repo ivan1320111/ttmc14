@@ -43,3 +43,6 @@ ent-MCPillCanisterMeraderm = банка с таблетками мерадерм
 ent-MCPillCanisterSalineGlucose = банка с таблетками изотоника
     .desc = Содержит таблетки, которые стимулируют регенерацию утраченной крови.
     .suffix = SalineGlucose, 16, MC
+ent-MCPillCanisterQuickClot = банка с таблетками гемостатика
+    .desc = Содержит таблетки, подавляющие внутреннее кровотечение до момента получения полного лечения.
+    .suffix = Quick-Clot, 16, MC

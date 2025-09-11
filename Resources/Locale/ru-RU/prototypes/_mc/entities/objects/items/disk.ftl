@@ -1,0 +1,10 @@
+ent-MCDisk = диск
+    .desc = { ent-BaseItem.desc }
+ent-MCDiskNuke = диск ядерной аутентификации
+    .desc = Не потеряй это.
+ent-MCDiskNukeRed = красный диск ядерной аутентификации
+    .desc = { ent-MCDiskNuke.desc }
+ent-MCDiskNukeGreen = зеленый диск ядерной аутентификации
+    .desc = { ent-MCDiskNuke.desc }
+ent-MCDiskNukeBlue = синий диск ядерной аутентификации
+    .desc = { ent-MCDiskNuke.desc }

@@ -1,3 +1,3 @@
-ent-MCIDCardSpatialAgent = ID Card (Spatial Agent)
-    .desc = A silver card which shows honour and dedication.
+ent-MCIDCardSpatialAgent = ID карта (Пространственый агент)
+    .desc = Серебряная карта, символизирующая честь и преданность делу.
     .suffix = MC, Admin

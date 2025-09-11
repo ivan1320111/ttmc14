@@ -1,5 +1,5 @@
-ent-MCSoap = soap
-    .desc = A cheap bar of soap. Doesn't smell.
+ent-MCSoap = мыло
+    .desc = Дешёвый кусок мыла. Без запаха.
     .suffix = MC
-ent-MCSoapNT = soap
-    .desc = A NanoTrasen bar of soap. It smells like phoron.
+ent-MCSoapNT = мыло
+    .desc = Кусок мыла NanoTrasen. Пахнет фороном.

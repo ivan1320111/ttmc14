@@ -1,6 +1,6 @@
-ent-MCIdCardCMO = Chief Medical Officer's ID Card
+ent-MCIdCardCMO = ID карта главного врача
     .desc = { ent-MCIdCard.desc }
-ent-MCIdCardDoctor = Medical Doctor's ID Card
+ent-MCIdCardDoctor = ID карта военного врача
     .desc = { ent-MCIdCard.desc }
-ent-MCIdCardResearcher = Researcher's ID Card
+ent-MCIdCardResearcher = ID карта исследователя
     .desc = { ent-MCIdCard.desc }

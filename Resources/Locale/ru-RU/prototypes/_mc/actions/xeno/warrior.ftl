@@ -6,3 +6,5 @@ ent-MCActionXenoFling = Откинуть (20)
     .desc = Отбрасывает захваченную цель на расстояние до 4 тайлов. Имеет общую перезарядку со способностью [color=purple]Кинуть[/color].
 ent-MCActionXenoLunge = Захватить (30)
     .desc = Совершает рывок на расстояние 4 тайлов, после чего сразу же берет цель в захват, оглушая её. Если целью является дружественный ксеноморф, он не получит оглушение, но всё так же будет схвачен.
+ent-MCActionXenoAgility = Agility
+    .desc = Drop to all fours to move faster. Using any ability will take you out of agility. Also reduces your armor by 30% in all categories.

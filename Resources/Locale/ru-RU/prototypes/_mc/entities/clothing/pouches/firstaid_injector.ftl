@@ -4,3 +4,6 @@ ent-MCPouchMedicalInjectorICC = подсумок для автоинъектор
     .desc = Специализированный медицинский подсумок, предназначенный для хранения автоинъекторов. Этот экземпляр, похоже, изготовлен из синтетической ткани бежевого цвета.
 ent-MCPouchMedicalInjectorSOM = подсумок для автоинъекторов
     .desc = Специализированный медицинский подсумок, предназначенный для хранения автоинъекторов. Этот экземпляр, похоже, изготовлен из традиционой ткани SOM.
+ent-MCPouchMedicalInjectorCorpsmanFull = { ent-MCPouchMedicalInjector }
+    .suffix = Corpsman, Full
+    .desc = { ent-MCPouchMedicalInjector.desc }

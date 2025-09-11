@@ -1,3 +1,4 @@
+
 ent-MCHeadsetResearch = гарнитура исследователя
     .desc = Стандартная военная гарнитура.
 ent-MCHeadsetMedical = гарнитура медецинского персонала

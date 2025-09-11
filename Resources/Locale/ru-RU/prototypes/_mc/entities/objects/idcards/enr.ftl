@@ -1,6 +1,6 @@
-ent-MCIdCardCSE = Chief Ship Engineer's ID Card
+ent-MCIdCardCSE = ID карта главного корабельного инженера
     .desc = { ent-MCSilverIdCard.desc }
-ent-MCIdCardRO = Requisitions Officer's ID Card
+ent-MCIdCardRO = ID карта оффицера снабжения
     .desc = { ent-MCSilverIdCard.desc }
-ent-MCIdCardST = Ship Technician's ID Card
+ent-MCIdCardST = ID карта корабельного инженера
     .desc = { ent-MCSilverIdCard.desc }

@@ -1,10 +1,10 @@
-ent-MCDogtagSquadLeader = Squad Leader's dogtags
+ent-MCDogtagSquadLeader = жетон командира отряда
     .desc = { ent-MCDogtag.desc }
-ent-MCDogtagSquadSmartgunner = Squad Smartgunner's dogtags
+ent-MCDogtagSquadSmartgunner = жетон оператора смартгана
     .desc = { ent-MCDogtag.desc }
-ent-MCDogtagSquadEngineer = Squad Engineer's dogtags
+ent-MCDogtagSquadEngineer = жетон инженера отряда
     .desc = { ent-MCDogtag.desc }
-ent-MCDogtagSquadCorpsman = Squad Corpsman's dogtags
+ent-MCDogtagSquadCorpsman = жетон санитара отряда
     .desc = { ent-MCDogtag.desc }
-ent-MCDogtagSquadMarine = Squad Marines's dogtags
+ent-MCDogtagSquadMarine = жетон морпеха отряда
     .desc = { ent-MCDogtag.desc }

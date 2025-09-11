@@ -1,4 +1,4 @@
-ent-MCSheetPhoron = phoron
+ent-MCSheetPhoron = форон
     .suffix = Full, MC
     .desc = { ent-SheetOtherBase.desc }
 ent-MCSheetPhoron15 = { ent-MCSheetPhoron }

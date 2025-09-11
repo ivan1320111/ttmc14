@@ -1,0 +1,12 @@
+ent-MCWeaponSmartGunSG29 = смарт-пулемет SG-29 Raummetall-KT 
+    .desc = Raummetall-KT SG-29 — текущий стандартный средний пулемёт TGMC с функцией опознавания «свой-чужой». Известен своей способностью эффективно обеспечивать мощную огневую поддержку. Обычно используется для удержания позиции или оказания огневой поддержки. Требует специальной подготовки, и функция опознавания «свой-чужой» не может быть отключена. Использует патроны калибра 10×26 мм.
+ent-MCAttachmentMuzzleSG29 = { ent-MCAttachmentBaseMuzzle }
+    .desc = { ent-MCAttachmentBaseMuzzle.desc }
+ent-MCAttachmentStockSG29 = { ent-MCAttachmentBaseStock }
+    .desc = { ent-MCAttachmentBaseStock.desc }
+ent-MCMagazineSmartGunSG29 = барабаный магазин SG-29
+    .desc = Барабанный магазин увеличенной ёмкости, аккуратно снаряжённый до максимальной вместимости специальными смарт-патронами 10×26 мм.
+ent-MCCartridgeSmartGunSG29 = патрон смарт-пулемета (10x26мм безгильзовая)
+    .desc = A handful of rounds to reload on the go.
+ent-MCBulletSmartGunSG29 = { ent-RMCBaseBullet }
+    .desc = { ent-RMCBaseBullet.desc }

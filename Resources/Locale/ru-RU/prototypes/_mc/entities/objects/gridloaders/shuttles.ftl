@@ -1,4 +1,4 @@
-ent-MCSpawnGridAlamo = alamo spawner
+ent-MCSpawnGridAlamo = спавнер Аламо
     .desc = { ent-MarkerBase.desc }
-ent-MCSpawnGridDebugAlamo = debug alamo spawner
+ent-MCSpawnGridDebugAlamo = спавнер Аламо (дебаг)
     .desc = { ent-MarkerBase.desc }

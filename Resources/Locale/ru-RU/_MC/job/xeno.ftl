@@ -19,4 +19,4 @@ mc-job-name-xeno-praetorian = Преторианец
 mc-job-name-xeno-ravager = Опустошитель
 mc-job-name-xeno-warlock = Варлок
 mc-job-name-xeno-shrike = Принцесса
-mc-job-name-xeno-queen = Королева  
+mc-job-name-xeno-queen = Королева

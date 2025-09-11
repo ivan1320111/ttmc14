@@ -1,0 +1,9 @@
+ent-MCFireFlamethrower = огонь
+    .suffix = MC, Flame
+    .desc = { ent-MCFire.desc }
+ent-MCFireFlamethrowerBlue = { ent-MCFire }
+    .suffix = MC, Blue
+    .desc = { ent-MCFire.desc }
+ent-MCFireFlamethrowerGreen = { ent-MCFire }
+    .suffix = MC, Green
+    .desc = { ent-MCFire.desc }
