@@ -13,6 +13,8 @@
       effects:
       - !type:ModifyBleedAmount
         amount: -1 # = 1 IB
+      - !type:MCStamina
+        potence: 15
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
