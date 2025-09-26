@@ -1,6 +1,4 @@
 using Content.Shared._MC.Stamina;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Physics.Components;
@@ -9,9 +7,10 @@ namespace Content.Server._MC.Stamina;
 
 public sealed class MCStaminaActiveSystem : EntitySystem
 {
-    [Dependency] private readonly MCStaminaSystem _stamina = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    private ISawmill _sawmill = default!;
+    [Dependency] private readonly SharedMoverController _moverController = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
+
+    [Dependency] private readonly MCStaminaSystem _mcStamina = default!;
 
     public override void Initialize()
     {
@@ -22,82 +21,66 @@ public sealed class MCStaminaActiveSystem : EntitySystem
     {
         base.Update(frameTime);
 
-    var query = EntityQueryEnumerator<MCStaminaComponent, MCStaminaActiveComponent, InputMoverComponent>();
-    while (query.MoveNext(out var uid, out var stamina, out var active, out var input))
-    {
-        if (!TryComp<PhysicsComponent>(uid, out var phys))
-            continue;
-
-        if (stamina.Current <= 0 && !active.ZeroSprintLock)
+        var query = EntityQueryEnumerator<MCStaminaComponent, MCStaminaActiveComponent, PhysicsComponent, InputMoverComponent>();
+        while (query.MoveNext(out var uid, out var stamina, out var active, out var phys, out var input))
         {
-            active.ZeroSprintLock = true;
-            _speed.RefreshMovementSpeedModifiers(uid);
-            if (TryComp<InputMoverComponent>(uid, out var mover))
+            if (stamina.Current <= 0 && !active.ZeroSprintLock)
             {
-                var moverController = EntitySystem.Get<Content.Shared.Movement.Systems.SharedMoverController>();
-                moverController.SetSprinting((uid, mover), 0, true);
+                active.ZeroSprintLock = true;
+                _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
+                _moverController.SetSprinting((uid, input), 0, true);
             }
-        }
 
-        if (active.ZeroSprintLock && stamina.Current >= 50)
-        {
-            if (input.Sprinting)
+            if (active.ZeroSprintLock && stamina.Current >= 50)
             {
-                if (TryComp<InputMoverComponent>(uid, out var mover))
+                if (input.Sprinting)
                 {
-                    var moverController = EntitySystem.Get<Content.Shared.Movement.Systems.SharedMoverController>();
-                    moverController.SetSprinting((uid, mover), 0, true);
+                    _moverController.SetSprinting((uid, input), 0, true);
+                }
+                else
+                {
+                    active.ZeroSprintLock = false;
+                    _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
                 }
             }
-            else
+
+            if (active.ZeroSprintLock)
             {
-                active.ZeroSprintLock = false;
-                _speed.RefreshMovementSpeedModifiers(uid);
+                _moverController.SetSprinting((uid, input), 0, true);
+                continue;
             }
-        }
 
-        if (active.ZeroSprintLock)
-        {
-            if (input.Sprinting && TryComp<InputMoverComponent>(uid, out var mover))
+            if (input.Sprinting && !active.Slowed && phys.LinearVelocity.Length() > 0.1f && stamina.Current > 0)
+                _mcStamina.DoStaminaDamage((uid, stamina), active.RunStaminaDamage, false);
+
+            if (stamina.Current >= active.SlowThreshold && !active.Slowed)
             {
-                var moverController = EntitySystem.Get<Content.Shared.Movement.Systems.SharedMoverController>();
-                moverController.SetSprinting((uid, mover), 0, true);
+                active.Slowed = true;
+                active.Change = true;
+                _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
+                continue;
             }
-            continue;
-        }
 
-        if (input.Sprinting && !active.Slowed && phys.LinearVelocity.Length() > 0.1f && stamina.Current > 0)
-        {
-            _stamina.DoStaminaDamage((uid, stamina), active.RunStaminaDamage, false);
-        }
+            if (stamina.Current > active.ReviveStaminaLevel || !active.Slowed)
+                continue;
 
-        if (stamina.Current >= active.SlowThreshold && !active.Slowed)
-        {
-            active.Slowed = true;
-            active.Change = true;
-            _speed.RefreshMovementSpeedModifiers(uid);
-            continue;
-        }
-
-        if (stamina.Current <= active.ReviveStaminaLevel && active.Slowed)
-        {
             active.Slowed = false;
             active.Change = true;
-            _speed.RefreshMovementSpeedModifiers(uid);
-            continue;
+            _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
         }
     }
-    }
 
-    private void OnRefresh(EntityUid uid, MCStaminaActiveComponent component, RefreshMovementSpeedModifiersEvent args)
+    private void OnRefresh(Entity<MCStaminaActiveComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (component.ZeroSprintLock)
+        if (ent.Comp.ZeroSprintLock)
         {
             args.ModifySpeed(args.WalkSpeedModifier, args.WalkSpeedModifier);
             return;
         }
-        if (!component.Change)
+
+        if (!ent.Comp.Change)
             return;
+
         args.ModifySpeed(args.WalkSpeedModifier, args.SprintSpeedModifier);
     }
 }
