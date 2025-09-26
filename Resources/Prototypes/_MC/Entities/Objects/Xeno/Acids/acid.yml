@@ -6,11 +6,11 @@
     lifetime: 1
   - type: DamageOnCollide
     damage:
-      types:
-        Heat: 14
+      groups:
+        Burn: 14
     chainDamage:
-      types:
-        Heat: 14
+      groups:
+        Burn: 14
 
 # acid_spray_duration = 10 SECONDS
 # acid_spray_damage_on_hit = 35
@@ -24,11 +24,11 @@
     lifetime: 10
   - type: DamageOnCollide
     damage:
-      types:
-        Heat: 35
+      groups:
+        Burn: 35
     chainDamage:
-      types:
-        Heat: 35
+      groups:
+        Burn: 35
 
 # acid_spray_duration = 6 SECONDS
 # acid_spray_damage = 8
@@ -45,11 +45,11 @@
     lifetime: 10
   - type: DamageOnCollide
     damage:
-      types:
-        Heat: 47
+      groups:
+        Burn: 47
     chainDamage:
-      types:
-        Heat: 47
+      groups:
+        Burn: 47
 
 - type: entity
   parent: MCXenoAcidSpray
@@ -59,8 +59,8 @@
     lifetime: 5
   - type: DamageOnCollide
     damage:
-      types:
-        Heat: 30
+      groups:
+        Burn: 30
     chainDamage:
-      types:
-        Heat: 30
+      groups:
+        Burn: 30

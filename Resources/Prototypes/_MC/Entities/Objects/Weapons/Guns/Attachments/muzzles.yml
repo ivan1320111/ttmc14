@@ -37,20 +37,16 @@
     attackRate: 1
     damage:
       groups:
-        Brute: 25
+        Brute: 20
   - type: DamageOtherOnHit
     damage:
       groups:
-        Brute: 18
+        Brute: 10
   - type: Item
     size: Small
     sprite: _MC/Objects/Weapons/Guns/Attachments/muzzle.rsi
   - type: DisarmMalus
     malus: 0.225
-  - type: UsableWhileDevoured
-    damage:
-      groups:
-        Brute: 18
   - type: AttachableVisuals
     rsi: _MC/Objects/Weapons/Guns/Attachments/muzzle.rsi
     prefix: bayonet
@@ -58,12 +54,15 @@
     modifiers:
     - bonusDamage:
         groups:
-          Brute: 20
+          Brute: 25
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
+        wieldedOnly: true
+      accuracyAddMult: -0.5
+    - conditions:
         unwieldedOnly: true
-      accuracyAddMult: -0.05
+      accuracyAddMult: -0.10
   - type: AttachablePrying
   - type: DeleteOnExplosion
 

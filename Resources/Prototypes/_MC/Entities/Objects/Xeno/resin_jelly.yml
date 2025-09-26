@@ -20,8 +20,8 @@
   - type: Flammable
     fireSpread: false
     damage:
-      types:
-        Heat: 3
+      groups:
+        Burn: 3
   - type: Sprite
     sprite: _MC/Objects/Xeno/resin_jelly.rsi
     state: icon
@@ -38,8 +38,8 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
-        !type:DamageTypeTrigger
-        damageType: Heat
+        !type:DamageGroupTrigger
+        damageGroup: Burn
         damage: 60
       behaviors:
       - !type:BurnBodyBehavior { }

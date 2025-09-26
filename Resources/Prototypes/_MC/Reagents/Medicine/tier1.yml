@@ -119,8 +119,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.2
-      # TODO: stamina damage
       effects:
+      - !type:MCStamina
+        potence: 0.5
       - !type:MCPurge
         amount: 1
         reagents:
@@ -176,8 +177,8 @@
         - !type:MobStateCondition
           mobstate: Critical
         damage:
-          types:
-            Asphyxiation: -1
+          groups:
+            Airloss: -1
       - !type:Jitter
         conditions:
         - !type:ReagentThreshold
@@ -295,8 +296,8 @@
         - !type:ReagentThreshold
           min: 30
         damage:
-          types:
-            Asphyxiation: 1
+          groups:
+            Airloss: 1
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
         conditions:

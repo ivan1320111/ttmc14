@@ -15,8 +15,8 @@
     sprite: _MC/Objects/Weapons/Guns/Pistols/p14.rsi
   - type: MeleeWeapon
     damage:
-      types:
-        Blunt: 8
+      groups:
+        Brute: 8
   - type: Gun
     shotsPerBurst: 1
     availableModes:
@@ -127,8 +127,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 20
+      groups:
+        Brute: 20
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 22

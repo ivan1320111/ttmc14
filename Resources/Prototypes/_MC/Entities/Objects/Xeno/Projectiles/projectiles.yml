@@ -9,8 +9,8 @@
   - type: Projectile
     impactEffect: null
     damage:
-      types:
-        Heat: 20
+      groups:
+        Burn: 20
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange
@@ -31,8 +31,8 @@
   - type: Projectile
     impactEffect: null
     damage:
-      types:
-        Heat: 35
+      groups:
+        Burn: 35
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
   - type: ProjectileMaxRange
@@ -50,8 +50,8 @@
   - type: Projectile
     impactEffect: null
     damage:
-      types:
-        Heat: 20
+      groups:
+        Burn: 20
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
   - type: ProjectileMaxRange

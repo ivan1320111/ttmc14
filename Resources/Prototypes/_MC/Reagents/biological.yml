@@ -33,8 +33,8 @@
         - !type:ReagentThreshold
           min: 120
         damage:
-          types:
-            Asphyxiation: 5 # применим логику, 3 литра за раз это смерть
+          groups:
+            Airloss: 5
     Drink:
       effects:
       - !type:SatiateThirst

@@ -1,12 +1,138 @@
 - type: entity
-  abstract: true
-  id: MCBaseMeleeWeapon
+  parent: [ MCBaseMeleeWeapon, BaseKnife ]
+  id: MCKnifeCombat
+  name: M5 survival knife
+  description: A standard survival knife of high quality. You can slide this knife into your boots, and can be field-modified to attach to the end of a rifle with cable coil.
   components:
+  - type: Tag
+    tags:
+    - MCKnife
+    - Knife
+  - type: Sprite
+    sprite: _MC/Objects/Weapons/Melee/combat_knife.rsi
+    state: icon
+  - type: MeleeWeapon
+    attackRate: 0.9
+    damage:
+      groups:
+        Brute: 30
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: DamageOtherOnHit
+    damage:
+      groups:
+        Brute: 20
   - type: MeleeDamageMultiplier
     whitelist:
       components:
       - Xeno
+  - type: Item
+    size: Normal
+    sprite: _MC/Objects/Weapons/Melee/combat_knife.rsi
+  - type: DeleteOnExplosion
+
+- type: entity
+  parent: [ MCBaseMeleeWeapon, BaseKnife, MCAttachmentBaseMuzzle ]
+  id: MCKnifeBayonet
+  name: M-22 bayonet
+  description: A sharp knife that is the standard issue combat knife of the TerraGov Marine Corps can be attached to a variety of weapons at will or used as a standard knife.
+  components:
+  - type: Clothing
+    slots:
+    - pocket
+    sprite: _MC/Objects/Weapons/Melee/bayonetknife.rsi
+  - type: Tag
+    tags:
+    - Knife
+    - MCBayonet
+    - MCAttachmentMuzzle
+    - MCAttachmentBayonet
+  - type: Sprite
+    sprite: _MC/Objects/Weapons/Melee/bayonetknife.rsi
+    state: icon
   - type: MeleeWeapon
-    angle: 0
-  - type: CMArmorPiercing
-    amount: 20
+    wideAnimationRotation: -135
+    attackRate: 1
+    damage:
+      groups:
+        Brute: 25
+  - type: DamageOtherOnHit
+    damage:
+      groups:
+        Brute: 20
+  - type: Item
+    size: Small
+    sprite: _MC/Objects/Weapons/Melee/bayonetknife.rsi
+  - type: DisarmMalus
+    malus: 0.225
+  - type: AttachableVisuals
+    rsi: _MC/Objects/Weapons/Melee/bayonetknife.rsi
+    prefix: bayonetknife
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        groups:
+          Brute: 25
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: -0.5
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.10
+  - type: AttachablePrying
+  - type: DeleteOnExplosion
+
+- type: entity
+  parent: [ MCBaseMeleeWeapon, BaseKnife, MCAttachmentBaseMuzzle ]
+  id: MCKnifeBayonetSOM
+  name: S20 SOM bayonet
+  description: A large knife that is the standard issue combat knife of the SOM. Can be attached to a variety of weapons at will or used as a standard knife.
+  components:
+  - type: Clothing
+    slots:
+    - pocket
+    sprite: _MC/Objects/Weapons/Melee/bayonetknife_som.rsi
+  - type: Tag
+    tags:
+    - Knife
+    - MCBayonet
+    - MCAttachmentMuzzle
+    - MCAttachmentBayonet
+  - type: Sprite
+    sprite: _MC/Objects/Weapons/Melee/bayonetknife_som.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1
+    damage:
+      groups:
+        Brute: 30
+  - type: DamageOtherOnHit
+    damage:
+      groups:
+        Brute: 20
+  - type: Item
+    size: Small
+    sprite: _MC/Objects/Weapons/Melee/bayonetknife_som.rsi
+  - type: DisarmMalus
+    malus: 0.225
+  - type: AttachableVisuals
+    rsi: _MC/Objects/Weapons/Melee/bayonetknife_som.rsi
+    prefix: bayonetknife
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        groups:
+          Brute: 25
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: -0.5
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.10
+  - type: AttachablePrying
+  - type: DeleteOnExplosion

@@ -55,15 +55,15 @@
     affectsDead: false
     affectsInfectedNested: false
     armorPiercingDamage:
-      types:
-        Heat: 20
-        Asphyxiation: 3
+      groups:
+        Burn: 20
+        Airloss: 3
     damage:
-      types:
-        Heat: 35
+      groups:
+        Burn: 35
     barricadeDamage:
-      types:
-        Heat: 8.5
+      groups:
+        Burn: 8.5
     whitelist:
       components:
       - Marine

@@ -31,8 +31,8 @@
   - type: Door
     canPry: false
     crushDamage:
-      types:
-        Blunt: 15
+      groups:
+        Brute: 15
     openSpriteState: resinopen
     closedSpriteState: resin
     openingSpriteState: resinopening
@@ -74,8 +74,8 @@
     cost: 25
   - type: MeleeReceivedMultiplier
     xenoDamage:
-      types:
-        Slash: 600
+      groups:
+        Brute: 600
     otherMultiplier: 1
   - type: XenoConstructionRequiresSupport
   - type: XenoConstruct
@@ -102,8 +102,8 @@
       map: [ "enum.DoorVisualLayers.BaseBolted" ]
   - type: Door
     crushDamage:
-      types:
-        Blunt: 15
+      groups:
+        Brute: 15
     openSpriteState: thick_resinopen
     closedSpriteState: thick_resin
     openingSpriteState: thick_resinopening

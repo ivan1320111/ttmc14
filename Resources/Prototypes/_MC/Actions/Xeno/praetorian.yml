@@ -28,8 +28,8 @@
   - type: Projectile
     impactEffect: null
     damage:
-      types:
-        Heat: 30
+      groups:
+        Burn: 30
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange
@@ -71,8 +71,8 @@
   - type: Projectile
     impactEffect: null
     damage:
-      types:
-        Heat: 30
+      groups:
+        Burn: 30
         Toxin: 20
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
@@ -136,8 +136,8 @@
   - type: Projectile
     impactEffect: null
     damage:
-      types:
-        Heat: 15
+      groups:
+        Burn: 15
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange
@@ -154,8 +154,8 @@
     lifetime: 0.5
   - type: DamageOnCollide
     damage:
-      types:
-        Heat: 14
+      groups:
+        Burn: 14
     chainDamage:
-      types:
-        Heat: 14
+      groups:
+        Burn: 14

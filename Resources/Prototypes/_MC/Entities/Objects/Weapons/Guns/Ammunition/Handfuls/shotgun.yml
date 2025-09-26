@@ -81,8 +81,8 @@
       shader: unshaded
   - type: Projectile
     damage:
-      types:
-        Piercing: 40
+      groups:
+        Brute: 40
   - type: CMArmorPiercing
     amount: 0
   - type: MCXenoSunderDamageOnHit
@@ -171,8 +171,8 @@
       shader: unshaded
   - type: Projectile
     damage:
-      types:
-        Piercing: 100
+      groups:
+        Brute: 100
   - type: MCXenoSunderDamageOnHit
     amount: 7.5
   - type: CMArmorPiercing
@@ -229,8 +229,8 @@
       shader: unshaded
   - type: Projectile
     damage:
-      types:
-        Piercing: 60
+      groups:
+        Brute: 60
   - type: MCXenoSunderDamageOnHit
     amount: 3.5
   - type: CMArmorPiercing
@@ -313,8 +313,8 @@
       shader: unshaded
   - type: Projectile
     damage:
-      types:
-        Piercing: 50
+      groups:
+        Brute: 50
   - type: CMArmorPiercing
     amount: 15
   - type: MCXenoSunderDamageOnHit
@@ -338,8 +338,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 40
+      groups:
+        Brute: 40
   - type: MCXenoSunderDamageOnHit
     amount: 5
 
@@ -374,8 +374,8 @@
       shader: unshaded
   - type: Projectile
     damage:
-      types:
-        Piercing: 50
+      groups:
+        Brute: 50
   - type: CMArmorPiercing
     amount: 15
   - type: MCXenoSunderDamageOnHit

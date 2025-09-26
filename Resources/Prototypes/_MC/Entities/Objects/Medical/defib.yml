@@ -51,10 +51,10 @@
     allowDoAfterMovement: false
     canDefibCrit: false
     cmZapHeal:
-    - Brute: -12
-    - Burn: -12
-    - Toxin: -12
-    - Genetic: -12
+    - Brute: -10
+    - Burn: -10
+    - Toxin: -10
+    - Genetic: -10
     zapHeal:
       groups:
         Airloss: -400

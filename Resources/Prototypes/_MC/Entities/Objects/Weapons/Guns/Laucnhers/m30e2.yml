@@ -18,8 +18,8 @@
     baseDelay: 0.2
   - type: MeleeWeapon
     damage:
-      types:
-        Blunt: 6
+      groups:
+        Brute: 6
   - type: Gun
     projectileSpeed: 40
     selectedMode: SemiAuto

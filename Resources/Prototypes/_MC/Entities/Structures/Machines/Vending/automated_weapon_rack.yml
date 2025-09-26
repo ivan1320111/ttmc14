@@ -71,8 +71,12 @@
       - id: MCMagazineMG42
       - id: MCWeaponMachineGunMG60
       - id: MCMagazineMG60
-    #- name: Melee
-    #  entries: []
+    - name: Melee
+      entries:
+      - id: MCKnifeCombat
+      - id: MCKnifeBayonet
+      - id: MCScabbardMacheteFilled
+      - id: MCSpear
     - name: Sidearm
       entries:
       - id: MCWeaponP14

@@ -135,8 +135,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 65
+      groups:
+        Brute: 65
   - type: RMCProjectileAccuracy
     thresholds:
     - range: 25

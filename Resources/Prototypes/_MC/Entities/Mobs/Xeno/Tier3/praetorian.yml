@@ -80,8 +80,8 @@
     acid: MCXenoAcidSprayPraetorian
     range: 5
     barricadeDamage:
-      types:
-        Heat: 5
+      groups:
+        Burn: 5
   - type: MCXenoScatterSpit
     count: 3
     projectileId: MCXenoProjectileHeavyScatterPraetorian

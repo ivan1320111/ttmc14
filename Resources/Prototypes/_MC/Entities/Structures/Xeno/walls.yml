@@ -15,8 +15,8 @@
     damageModifierSet: Resin
   - type: MeleeReceivedMultiplier
     xenoDamage:
-      types:
-        Slash: 600
+      groups:
+        Brute: 600
     otherMultiplier: 1
   - type: PlacementReplacement
     key: walls

@@ -334,6 +334,8 @@
         damage:
           groups:
             Toxin: 1
+      - !type:MCStamina
+        potence: -6
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -476,6 +478,8 @@
         damage:
           groups:
             Toxin: 0.2
+      #- !type:MCStamina
+      #  potence: -20 Пока не будет условия он-инжект я хуй это добавлю
       # Buff
       - !type:GenericStatusEffect
         key: Stun
@@ -510,6 +514,11 @@
         effectProto: StatusEffectDrowsiness
         time: 15
         type: Add
+      - !type:MCStamina
+        potence: -0.1
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold

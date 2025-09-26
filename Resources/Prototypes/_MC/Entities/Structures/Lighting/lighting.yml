@@ -1,0 +1,358 @@
+- type: entity
+  parent: AlwaysPoweredWallLight
+  id: MCLightFixtureAlwaysPowered
+  name: light fixture
+  description: A lighting fixture.
+  suffix: MC, Always powered
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _MC/Structures/Lighting/light_tubes.rsi
+    state: tube1
+    layers:
+    - state: tube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#FFFFFF"
+    energy: 1
+    radius: 10
+    softness: 1
+    castShadows: true
+    offset: "0, -0.5"
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: tube-empty
+      Off: tube0
+      On: tube1
+      Broken: tube-broken
+      Burned: tube-burned
+  - type: Destructible
+    thresholds: []
+  # - type: Construction
+    # graph: MCLightFixture
+    # node: tubeLight
+  - type: RMCBreakLightOnAttack
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: MCLightFixtureAlwaysPowered
+  id: MCLightFixtureBlueAlwaysPowered
+  components:
+  - type: Sprite
+    state: btube1
+    layers:
+    - state: btube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#D2E3EC"
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: btube-empty
+      Off: btube0
+      On: btube1
+      Broken: btube-broken
+      Burned: btube-burned
+
+- type: entity
+  parent: MCLightFixtureAlwaysPowered
+  id: MCLightFixtureRedAlwaysPowered
+  components:
+  - type: Sprite
+    state: rtube1
+    layers:
+    - state: rtube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#FA644B"
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: tube-empty
+      Off: rtube0
+      On: rtube1
+      Broken: rtube-broken
+      Burned: rtube-burned
+
+# Light Tube, Empty
+- type: entity
+  parent: MCLightFixtureAlwaysPowered
+  id: MCLightFixtureEmpty
+  suffix: MC, Empty
+  components:
+  - type: Sprite
+    state: empty
+  - type: PointLight
+    enabled: false
+  - type: PoweredLight
+    bulb: Tube
+    unarmedHitShock: 0
+  - type: DamageOnInteract
+    damage:
+      groups:
+        Burn: 2
+  - type: ContainerContainer
+    containers:
+      light_bulb: !type:ContainerSlot
+  - type: ApcPowerReceiver
+  - type: Appearance
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 40
+    channel: Lighting
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
+
+- type: entity
+  parent: MCLightFixtureEmpty
+  id: MCLightFixtureBlueEmpty
+  components:
+  - type: Sprite
+    state: btube1
+    layers:
+    - state: btube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: tube-empty
+      Off: btube0
+      On: btube1
+      Broken: btube-broken
+      Burned: btube-burned
+
+- type: entity
+  parent: MCLightFixtureEmpty
+  id: MCLightFixtureRedEmpty
+  components:
+  - type: Sprite
+    state: rtube1
+    layers:
+    - state: rtube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: tube-empty
+      Off: rtube0
+      On: rtube1
+      Broken: rtube-broken
+      Burned: rtube-burned
+
+# Light Tube
+- type: entity
+  parent: MCLightFixtureEmpty
+  id: MCLightFixture
+  suffix: MC
+  components:
+  - type: Sprite
+    state: tube1
+  - type: PointLight
+    enabled: true
+  - type: PoweredLight
+    hasLampOnSpawn: CMLightTube # Временно
+    unarmedHitShock: 0
+  - type: DamageOnInteract
+    damage:
+      groups:
+        Burn: 2
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -15
+    range: 2
+    sound:
+      path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
+
+- type: entity
+  parent: MCLightFixture
+  id: MCLightFixtureBlue
+  components:
+  - type: Sprite
+    state: btube1
+    layers:
+    - state: btube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightTubeBlue
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: tube-empty
+      Off: btube0
+      On: btube1
+      Broken: btube-broken
+      Burned: btube-burned
+
+- type: entity
+  parent: MCLightFixture
+  id: MCLightFixtureRed
+  components:
+  - type: Sprite
+    state: rtube1
+    layers:
+    - state: rtube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: tube-empty
+      Off: rtube0
+      On: rtube1
+      Broken: rtube-broken
+      Burned: rtube-burned
+
+# Light Bulb, Always powered
+- type: entity
+  parent: MCLightFixtureAlwaysPowered
+  id: MCLightFixtureSmallAlwaysPowered
+  description: A small lighting fixture.
+  suffix: MC, Always powered
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/Lighting/light_bulb.rsi
+    state: bulb1
+    layers:
+    - state: bulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    energy: 1.0
+    radius: 6
+    softness: 1.1
+    enabled: true
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bulb-empty
+      Off: bulb0
+      On: bulb1
+      Broken: bulb-broken
+      Burned: bulb-burned
+  - type: Destructible
+    thresholds: []
+  #- type: Construction
+  #  graph: CMLightFixture
+  #  node: bulbLight
+  - type: RMCBreakLightOnAttack
+
+- type: entity
+  parent: CMLightFixtureSmallAlwaysPowered
+  id: MCLightFixtureSmallBlueAlwaysPowered
+  components:
+  - type: Sprite
+    state: bbulb1
+    layers:
+    - state: bbulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned
+
+# Light Bulb, Empty
+- type: entity
+  parent: MCLightFixtureSmallAlwaysPowered
+  id: MCLightFixtureSmallEmpty
+  suffix: MC, Empty
+  components:
+  - type: Sprite
+    state: bulb-empty
+  - type: PointLight
+    enabled: false
+    offset: "0, -0.5"
+  - type: PoweredLight
+    bulb: Bulb
+    unarmedHitShock: 0
+  - type: DamageOnInteract
+    damage:
+      groups:
+        Burn: 2
+  - type: ContainerContainer
+    containers:
+      light_bulb: !type:ContainerSlot
+  - type: ApcPowerReceiver
+  - type: Appearance
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 40
+    channel: Lighting
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
+
+- type: entity
+  parent: MCLightFixtureSmallEmpty
+  id: MCLightFixtureSmallBlueEmpty
+  components:
+  - type: Sprite
+    state: bbulb1
+    layers:
+    - state: bbulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned
+
+# Light Bulb
+- type: entity
+  parent: MCLightFixtureSmallEmpty
+  id: MCLightFixtureSmall
+  suffix: MC
+  components:
+  - type: Sprite
+    state: bulb1
+  - type: PointLight
+    enabled: true
+  - type: PoweredLight
+    hasLampOnSpawn: CMLightBulb
+    unarmedHitShock: 0
+  - type: DamageOnInteract
+    damage:
+      groups:
+        Burn: 2
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -15
+    range: 2
+    sound:
+      path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
+
+- type: entity
+  parent: MCLightFixtureSmall
+  id: MCLightFixtureSmallBlue
+  components:
+  - type: Sprite
+    state: bbulb1
+    layers:
+    - state: bbulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightBulbBlue
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned

@@ -56,12 +56,12 @@
     damageDead: false
     fire: true
     damage:
-      types:
-        Heat: 31
+      groups:
+        Burn: 31
   - type: RMCIgniteOnCollide
     maxStacks: 20
     intensity: 31
     duration: 10
     tileDamage:
-      types:
-        Heat: 0.1
+      groups:
+        Burn: 0.1
