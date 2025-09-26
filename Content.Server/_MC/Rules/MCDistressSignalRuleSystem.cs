@@ -1,15 +1,12 @@
 ﻿using Content.Server._MC.Xeno.Hive;
 using Content.Server._MC.Xeno.Spawn;
-using Content.Server._RMC14.Dropship;
 using Content.Server.Administration.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Maps;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
-using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._MC.Rules;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -23,7 +20,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server._MC.Rules;
 
-public sealed class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponent>
+public sealed class MCDistressSignalRuleSystem : MCRuleSystem<MCDistressSignalRuleComponent>
 {
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -50,9 +47,6 @@ public sealed class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponent>
 
     private void OnMapLoading(LoadingMapsEvent ev)
     {
-        ev.Maps.Clear();
-        ev.Maps.Add(_prototype.Index<GameMapPrototype>("MCCanterbury"));
-
         _mcXenoSpawn.SelectRandomPlanet();
         GameTicker.UpdateInfoText();
     }
@@ -66,7 +60,7 @@ public sealed class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponent>
                 continue;
 
             OperationName = GetRandomOperationName();
-            if (!_mcXenoSpawn.SpawnXenoMap<MCCrashRuleComponent>((uid, comp)))
+            if (!_mcXenoSpawn.SpawnXenoMap<MCDistressSignalRuleComponent>((uid, comp)))
                 continue;
 
             StartBioscan();
@@ -76,8 +70,6 @@ public sealed class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponent>
 
             RefreshIFF(comp.MarineFaction);
             RefreshFaxes();
-
-            CrashAlmayer(comp.ShuttleCrushTime);
 
             var xenoSpawnPoints = GetEntities<XenoSpawnPointComponent>();
 
@@ -243,20 +235,5 @@ public sealed class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponent>
     private void CheckRoundShouldEnd()
     {
 
-    }
-
-    private void CrashAlmayer(TimeSpan flyTime)
-    {
-        var points = GetEntities<MCCrashPointComponent>();
-        if (points.Count == 0)
-            return;
-
-        var point = _random.Pick(points);
-        var query = EntityQueryEnumerator<AlmayerComponent, ShuttleComponent>();
-        while (query.MoveNext(out var uid, out _, out var shuttle))
-        {
-            _shuttle.FTLToCoordinates(uid, shuttle, Transform(point).Coordinates.Offset(Comp<MCCrashPointComponent>(point).Offset), Angle.Zero, hyperspaceTime: (float) flyTime.TotalSeconds);
-            return;
-        }
     }
 }

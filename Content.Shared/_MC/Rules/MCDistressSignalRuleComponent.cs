@@ -6,8 +6,8 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._MC.Rules;
 
-[RegisterComponent, NetworkedComponent]
-public sealed partial class MCCrashRuleComponent : Component, IXenoMapRuleComponent
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class MCDistressSignalRuleComponent : Component, IXenoMapRuleComponent
 {
     [DataField]
     public EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
@@ -19,7 +19,6 @@ public sealed partial class MCCrashRuleComponent : Component, IXenoMapRuleCompon
     public ProtoId<JobPrototype> ShrikeJob = "MCXenoShrike";
 
     [DataField]
-
     public EntProtoId QueenEnt = "MCXenoQueen";
 
     [DataField]
@@ -37,16 +36,6 @@ public sealed partial class MCCrashRuleComponent : Component, IXenoMapRuleCompon
     [DataField]
     public EntityUid? XenoMap { get; set; }
 
-    // Global
-
-#if !FULL_RELEASE
-    [DataField]
-    public TimeSpan ShuttleCrushTime = TimeSpan.FromSeconds(15);
-#else
-    [DataField]
-    public TimeSpan ShuttleCrushTime = TimeSpan.FromMinutes(10);
-#endif
-
     // Marine
 
     [DataField]
@@ -62,11 +51,4 @@ public sealed partial class MCCrashRuleComponent : Component, IXenoMapRuleCompon
 
     [DataField]
     public TimeSpan XenoSwapTimer = TimeSpan.FromMinutes(5);
-
-    // TODO: starting_squad
-
-    // TODO: evo_requirements
-    // /datum/xeno_caste/king = 14
-    // /datum/xeno_caste/queen = 10
-    // /datum/xeno_caste/hivelord = 5
 }
