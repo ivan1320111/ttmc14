@@ -1,0 +1,111 @@
+﻿- type: entity
+  parent:
+  # MC
+  - MCXenoBase
+  - MCXenoCharge
+  # RMC
+  - CMXenoDeveloped
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  id: MCXenoPyrogen
+  name: Pyrogen
+  description: A skittish alien, it burns with fury.
+  components:
+  - type: Sprite
+    sprite: _MC/Mobs/Xenos/pyrogen.rsi
+    offset: 0,0.35
+  - type: GhostRole
+    name: mc-job-name-xeno-pyrogen
+  - type: FixedIdentity
+    name: mc-job-name-xeno-pyrogen
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      275: Critical
+      325: Dead
+  - type: XenoPlasma
+    plasma: 300
+    maxPlasma: 300
+    plasmaRegenOnWeeds: 18
+  - type: Xeno
+    tier: 2
+    role: MCXenoPyrogen
+    actionIds:
+    - MCActionXenoRest
+    - MCActionXenoPsydrain
+    - MCActionXenoDevolve
+    # Main
+    - MCActionXenoInferno
+    - MCActionXenoFireball
+    - MCActionXenoFirecharge
+    - MCActionXenoWhirlwind
+    hudOffset: -0.15,0.25
+  - type: XenoEvolution
+    canEvolveWithoutGranter: true
+    actionId: MCActionXenoEvolve
+    max: 225
+    evolvesTo:
+    - MCXenoCrusher
+    - MCXenoDefiler
+    - MCXenoGorger
+    - MCXenoWarlock
+    - MCXenoPraetorian
+    - MCXenoBoiler
+    - MCXenoRavager
+    evolvesToWithoutPoints:
+    - MCXenoShrike
+    - MCXenoQueen
+  - type: XenoDevolve
+    devolvesTo:
+    - MCXenoDefender
+    - MCXenoDrone
+    - MCXenoRunner
+    - MCXenoSentinel
+  - type: MCArmor
+    melee: 40
+    bullet: 40
+    laser: 40
+    energy: 40
+    bomb: 0
+    bio: 30
+    fire: 200
+    acid: 30
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Burn: 22
+  - type: MovementSpeedModifier # ИЗМЕНИ СКОРОСТЬ!!!
+    baseWalkSpeed: 3.125
+    baseSprintSpeed: 4.545
+  - type: TacticalMapIcon
+    icon:
+      sprite: _MC/Interface/Xeno/icons.rsi
+      state: pyrogen
+  # Passive abilities
+  - type: MCXenoSunder
+    multiplier: 0.8
+  - type: RMCImmuneToIgnition
+    bypassWhitelist:
+      components:
+      - None  # Only fires with this component can ignite the queen
+  - type: RMCImmuneToFireTileDamage
+    bypassWhitelist:
+      components:
+      - None  # Only fires with this component can bypass immunity
+  # Abilities
+  - type: MCXenoHeadbuttCharge
+  - type: MCXenoInferno
+    damage:
+      groups:
+        Burn: 30
+  - type: MCXenoFireball
+  - type: MCXenoWhirlwind
+    fire: MCTileFireNeon
+    range: 7
+    doAfter: 0.6
+    delay: 0.3
+    barricadeDamage:
+      types:
+        Heat: 5
+  - type: MCXenoFirecharge

@@ -5,6 +5,7 @@ mc-job-name-xeno-drone = Дрон
 mc-job-name-xeno-runner = Бегун
 mc-job-name-xeno-sentinel = Часовой
 mc-job-name-xeno-bull = Бык
+mc-job-name-xeno-pyrogen = Пироген
 mc-job-name-xeno-carrier = Переносчик
 mc-job-name-xeno-hivelord = Лорд Улья
 mc-job-name-xeno-hunter = Охотник

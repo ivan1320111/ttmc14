@@ -89,6 +89,14 @@
   abstract: true
   components:
   - type: ActiveInputMover
+  - type: RMCImmuneToIgnition
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass
+  - type: RMCImmuneToFireTileDamage
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass
   - type: MCXenoDamageVisuals
 
 - type: entity
