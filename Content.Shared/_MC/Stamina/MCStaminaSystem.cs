@@ -20,12 +20,14 @@ using System.Linq;
 
 namespace Content.Shared._MC.Stamina;
 
-public sealed partial class MCStaminaSystem : EntitySystem
+public sealed class MCStaminaSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedStutteringSystem _stutter = default!;
+
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     public override void Initialize()
@@ -59,33 +61,35 @@ public sealed partial class MCStaminaSystem : EntitySystem
         var time = _timing.CurTime;
 
         var query = EntityQueryEnumerator<MCStaminaComponent>();
-
-        while (query.MoveNext(out var uid, out var stamina))
+        while (query.MoveNext(out var uid, out var component))
         {
-            if (stamina.Current == stamina.Max)
+            if (Math.Abs(component.Current - component.Max) < double.Epsilon)
                 continue;
 
-            if (TryComp<Content.Shared._MC.Stamina.MCStaminaActiveComponent>(uid, out var active))
+            if (TryComp<MCStaminaActiveComponent>(uid, out var active))
             {
                 if (active.ZeroSprintLock && TryComp<InputMoverComponent>(uid, out var input) && input.Sprinting)
-                {
                     continue;
-                }
             }
 
-            if (time >= stamina.NextRegen)
-                DoStaminaDamage((uid, stamina), -stamina.RegenPerTick);
+            if (time >= component.NextRegen)
+                DoStaminaDamage((uid, component), -component.RegenPerTick);
 
-            if (stamina.Current <= -25)
+            if (component.Current > component.DamageThresholds)
+                continue;
+
+            if (!TryComp<DamageableComponent>(uid, out var damageable))
+                continue;
+
+            var spec = new DamageSpecifier
             {
-                if (TryComp<DamageableComponent>(uid, out var dmg))
+                DamageDict =
                 {
-                    var dmgSys = EntitySystem.Get<DamageableSystem>();
-                    var spec = new DamageSpecifier();
-                    spec.DamageDict["Asphyxiation"] = 2.5f * frameTime;
-                    dmgSys.TryChangeDamage(uid, spec, true, true, dmg);
-                }
-            }
+                    ["Asphyxiation"] = component.DamageMultiplier * frameTime,
+                },
+            };
+
+            _damageable.TryChangeDamage(uid, spec, true, false, damageable);
         }
     }
 
@@ -97,11 +101,11 @@ public sealed partial class MCStaminaSystem : EntitySystem
         ent.Comp.Current = Math.Clamp(ent.Comp.Current - amount, -40, ent.Comp.Max);
 
         if (ent.Comp.Current <= -10)
-        {
-            _sizeStun.TryKnockOut(ent, TimeSpan.FromSeconds(5), true);
-        }
+            _sizeStun.TryKnockOut(ent, TimeSpan.FromSeconds(5));
+
         if (updateRegenTimer)
             ent.Comp.NextRegen = _timing.CurTime + (amount > 0 ? ent.Comp.RestPeriod : ent.Comp.TimeBetweenChecks);
+
         SetStaminaAlert((ent, ent.Comp));
     }
 
@@ -110,29 +114,12 @@ public sealed partial class MCStaminaSystem : EntitySystem
         if (ent.Comp.RequiresWield && TryComp<WieldableComponent>(ent.Owner, out var wieldable) && !wieldable.Wielded)
             return;
 
-        if (!args.IsHit ||
-            !args.HitEntities.Any() ||
-            ent.Comp.Damage <= 0f)
+        foreach (var target in args.HitEntities)
         {
-            return;
-        }
-
-        var stamQuery = GetEntityQuery<MCStaminaComponent>();
-        var toHit = new List<(EntityUid Entity, MCStaminaComponent Component)>();
-
-        foreach (var hit in args.HitEntities)
-        {
-            if (!stamQuery.TryGetComponent(hit, out var stam))
+            if (!TryComp<MCStaminaComponent>(target, out var stamina))
                 continue;
 
-            toHit.Add((hit, stam));
-        }
-
-        var damage = ent.Comp.Damage;
-
-        foreach (var (hit, comp) in toHit)
-        {
-            DoStaminaDamage(hit, damage / toHit.Count, true);
+            DoStaminaDamage((target, stamina), ent.Comp.Damage);
         }
     }
 
@@ -148,28 +135,29 @@ public sealed partial class MCStaminaSystem : EntitySystem
 
     private void OnCollide(Entity<MCStaminaDamageOnCollideComponent> ent, EntityUid target)
     {
-        if (!TryComp<MCStaminaComponent>(target, out var stam))
+        if (!TryComp<MCStaminaComponent>(target, out var stamina))
             return;
 
-        DoStaminaDamage((target, stam), ent.Comp.Damage, true);
+        DoStaminaDamage((target, stamina), ent.Comp.Damage);
     }
 
     private void SetStaminaAlert(Entity<MCStaminaComponent> ent)
     {
         var level = 0;
         var thresholds = ent.Comp.TierThresholds;
-        if (thresholds != null && thresholds.Length > 0)
+
+        if (thresholds.Length > 0)
         {
             for (var i = 0; i < thresholds.Length; i++)
             {
                 if (ent.Comp.Current <= thresholds[i])
                     level = i;
             }
-            _alerts.ShowAlert(ent, ent.Comp.StaminaAlert, (short)((thresholds.Length - 1) - level));
+
+            _alerts.ShowAlert(ent, ent.Comp.StaminaAlert, (short) (thresholds.Length - 1 - level));
+            return;
         }
-        else
-        {
-            _alerts.ShowAlert(ent, ent.Comp.StaminaAlert, 0);
-        }
+
+        _alerts.ShowAlert(ent, ent.Comp.StaminaAlert, 0);
     }
 }

@@ -117,8 +117,8 @@
   - type: AttachableWeaponMeleeMods
     modifiers:
     - bonusDamage:
-        types:
-          Blunt: -10
+        groups:
+          Brute: -10
   - type: AttachableWeaponRangedMods
     fireModeMods:
     - conditions:

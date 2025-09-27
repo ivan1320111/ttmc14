@@ -80,8 +80,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 120
+      groups:
+        Brute: 120
   - type: CMArmorPiercing
     amount: 20
   - type: MCXenoSunderDamageOnHit

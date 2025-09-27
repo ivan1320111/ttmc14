@@ -50,7 +50,11 @@ public sealed class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponent>
 
     private void OnMapLoading(LoadingMapsEvent ev)
     {
-        ev.Maps = [ _prototype.Index<GameMapPrototype>("MCCanterbury") ];
+        if (!GameTicker.IsGameRuleAdded<MCCrashRuleComponent>())
+            return;
+
+        ev.Maps.Clear();
+        ev.Maps.Add(_prototype.Index<GameMapPrototype>("MCCanterbury"));
 
         _mcXenoSpawn.SelectRandomPlanet();
         GameTicker.UpdateInfoText();
@@ -65,7 +69,7 @@ public sealed class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponent>
                 continue;
 
             OperationName = GetRandomOperationName();
-            if (!_mcXenoSpawn.SpawnXenoMap((uid, comp)))
+            if (!_mcXenoSpawn.SpawnXenoMap<MCCrashRuleComponent>((uid, comp)))
                 continue;
 
             StartBioscan();

@@ -5,15 +5,15 @@
   components:
   - type: DamageOnCollide
     damage:
-      types:
-        Heat: 25
+      groups:
+        Burn: 25
   - type: RMCIgniteOnCollide
     maxStacks: 15
     intensity: 25
     duration: 15
     tileDamage:
-      types:
-        Heat: 0.15
+      groups:
+        Burn: 0.15
   - type: TileFire
     id: MCFireHidp
     duration: 25

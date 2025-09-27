@@ -29,8 +29,8 @@
   - type: Projectile
     impactEffect: null
     damage:
-      types:
-        Heat: 16
+      groups:
+        Burn: 16
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange

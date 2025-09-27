@@ -16,12 +16,12 @@
         multiplier: 0.2
   metabolisms:
     Poison:
-      metabolismRate: 0.55
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
         damage:
-          types:
-            Poison: 0.55
+          groups:
+            Toxin: 1
       - !type:FlammableReaction
         multiplier: 0.2
       - !type:ChemVomit

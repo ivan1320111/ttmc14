@@ -30,8 +30,8 @@
     - Back
   - type: MeleeWeapon
     damage:
-      types:
-        Blunt: 20
+      groups:
+        Brute: 20
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -488,8 +488,8 @@
       shader: unshaded
   - type: Projectile
     damage:
-      types:
-        Piercing: 40
+      groups:
+        Brute: 40
   - type: CMArmorPiercing
     amount: 30
   - type: MCXenoSunderDamageOnHit
@@ -519,8 +519,8 @@
       shader: unshaded
   - type: Projectile
     damage:
-      types:
-        Piercing: 50
+      groups:
+        Brute: 50
   - type: CMArmorPiercing
     amount: 25
   - type: MCXenoSunderDamageOnHit
@@ -539,8 +539,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 10
+      groups:
+        Brute: 10
   - type: MCXenoSunderDamageOnHit
     amount: 0.5
   - type: MCStunOnHit
@@ -554,8 +554,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 10
+      groups:
+        Brute: 10
   - type: MCXenoSunderDamageOnHit
     amount: 0.5
   - type: MCStunOnHit
@@ -569,8 +569,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 10
+      groups:
+        Brute: 10
   - type: MCXenoSunderDamageOnHit
     amount: 0.5
   - type: MCXenoPlasmaDamageOnHit
@@ -583,8 +583,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 10
+      groups:
+        Brute: 10
   - type: MCXenoSunderDamageOnHit
     amount: 0.5
   - type: MCStunOnHit
@@ -598,8 +598,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 10
+      groups:
+        Brute: 10
   - type: MCXenoSunderDamageOnHit
     amount: 0.5
   - type: IgniteOnProjectileHit
@@ -612,8 +612,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 60
+      groups:
+        Brute: 60
   - type: MCXenoSunderDamageOnHit
     amount: 0.5
   - type: RMCAreaDamage

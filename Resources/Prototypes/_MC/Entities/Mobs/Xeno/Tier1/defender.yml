@@ -68,11 +68,11 @@
   - type: XenoCrest
   - type: XenoHeadbutt
     damage:
-      types:
-        Blunt: 30
+      groups:
+        Brute: 30
     crestedDamageReduction:
-      types:
-        Blunt: -10
+      groups:
+        Brute: -10
   - type: XenoAnimateMovement
   - type: XenoFortify
   - type: MeleeWeapon
@@ -106,8 +106,8 @@
     name: mc-job-name-xeno-defender
   - type: XenoTailSweep
     damage:
-      types:
-        Slash: 30
+      groups:
+        Brute: 30
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.941
     baseSprintSpeed: 4.166

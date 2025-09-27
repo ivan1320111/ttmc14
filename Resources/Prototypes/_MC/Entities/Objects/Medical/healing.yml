@@ -58,11 +58,8 @@
     damageContainers:
     - Biological
     damage:
-      types:
-        Heat: -3 # для баланса ибо мехи нету нормальной
-        Cold: -2
-        Shock: -1
-        Caustic: -1
+      groups:
+        Burn: -3
     healingBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
       params:
@@ -111,9 +108,7 @@
     - Biological
     damage:
       groups:
-        Brute: -5
-      types:
-        Piercing: -2
+        Brute: -3
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
       params:
@@ -181,8 +176,6 @@
     damage:
       groups:
         Brute: -12
-      types:
-        Piercing: -5
   - type: WoundTreater
     wound: Brute
     treats: true
@@ -237,9 +230,7 @@
     - Biological
     damage:
       groups:
-        Burn: -13
-      types:
-        Heat: -5
+        Burn: -12
     healingBeginSound:
       path: "/Audio/_RMC14/Medical/bandage.ogg"
       params:
@@ -295,7 +286,7 @@
     group: Brute
     consumable: true
     damage: -40
-    unskilledDamage: -30 # хуйня используется лишь 1 раз
+    unskilledDamage: -30
     canUseUnskilled: true
     skills:
       RMCSkillMedical: 1
@@ -351,9 +342,7 @@
     - Biological
     damage:
       groups:
-        Brute: -13
-      types:
-        Piercing: -7
+        Brute: -15
   - type: WoundTreater
     wound: Brute
     treats: true
@@ -409,9 +398,7 @@
     - Biological
     damage:
       groups:
-        Burn: -12
-      types:
-        Heat: -7
+        Burn: -15
     healingBeginSound:
       path: "/Audio/_RMC14/Medical/bandage.ogg"
       params:

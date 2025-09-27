@@ -224,3 +224,44 @@
   - type: Item
     size: Large
     sprite: _MC/Objects/Weapons/Melee/machete.rsi
+
+# No Parity
+- type: entity
+  parent: MCMachete
+  id: MCMacheteAntiPlasma
+  name: energy machete
+  suffix: MC
+  description: A sleek energy machete. Specially designed for large-scale battles against Xenomorphs by the TerraGov Marine Corps. However, it is difficult to carry along with the standard kit.
+  components:
+  - type: PointLight
+    color: "#59F7FF"
+    energy: 2
+    radius: 1.5
+    softness: 1
+    castShadows: true
+  - type: Tag
+    tags:
+    - MCMachete
+    - Knife
+  - type: Sprite
+    sprite: _MC/Objects/Weapons/Melee/anti_machete.rsi
+    state: icon
+  - type: Item
+    size: Large
+    sprite: _MC/Objects/Weapons/Melee/anti_machete.rsi
+  - type: Reflect
+    reflectProb: 0.1
+    spread: 20
+  - type: MeleeWeapon
+    attackRate: 2
+    autoAttack: true
+    damage:
+      groups:
+        Brute: 60
+  - type: MCXenoPlasmaDamageOnHit
+    amount: 60
+    missingMultiplier: 1
+  - type: DamageOtherOnHit
+    damage:
+      groups:
+        Brute: 0

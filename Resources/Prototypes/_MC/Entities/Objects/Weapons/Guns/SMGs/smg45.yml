@@ -181,8 +181,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 27.5
+      groups:
+        Brute: 27.5
   - type: MCXenoSunderDamageOnHit
     amount: 1
   - type: RMCProjectileDamageFalloff
@@ -215,8 +215,8 @@
   components:
   - type: Projectile
     damage:
-      types:
-        Piercing: 15
+      groups:
+        Brute: 15
   - type: MCXenoSunderDamageOnHit
     amount: 1
   - type: RMCProjectileDamageFalloff

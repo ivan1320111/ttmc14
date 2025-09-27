@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/10/2025 10:51:10
+  time: 09/26/2025 00:22:57
   entityCount: 388
 maps: []
 grids:
@@ -798,102 +798,6 @@ entities:
     components:
     - type: Transform
       pos: -3.5,-3.5
-      parent: 1
-- proto: CMLightFixture
-  entities:
-  - uid: 57
-    components:
-    - type: Transform
-      pos: -4.5,-5.5
-      parent: 1
-  - uid: 223
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 5.5,5.5
-      parent: 1
-  - uid: 224
-    components:
-    - type: Transform
-      pos: 4.5,-5.5
-      parent: 1
-  - uid: 225
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 6.5,-1.5
-      parent: 1
-  - uid: 226
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 6.5,-4.5
-      parent: 1
-  - uid: 227
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,1.5
-      parent: 1
-  - uid: 229
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -3.5,1.5
-      parent: 1
-  - uid: 257
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -1.5,11.5
-      parent: 1
-  - uid: 258
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,11.5
-      parent: 1
-- proto: CMLightFixtureSmall
-  entities:
-  - uid: 36
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -5.5,-2.5
-      parent: 1
-  - uid: 43
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -5.5,4.5
-      parent: 1
-  - uid: 219
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -3.5,10.5
-      parent: 1
-  - uid: 220
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4.5,10.5
-      parent: 1
-  - uid: 221
-    components:
-    - type: Transform
-      pos: -3.5,7.5
-      parent: 1
-  - uid: 222
-    components:
-    - type: Transform
-      pos: 3.5,7.5
-      parent: 1
-  - uid: 228
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -2.5,5.5
       parent: 1
 - proto: CMLightReplacer
   entities:
@@ -1759,6 +1663,102 @@ entities:
     components:
     - type: Transform
       pos: -2.5,-4.5
+      parent: 1
+- proto: MCLightFixture
+  entities:
+  - uid: 36
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,11.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -1.5,11.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,1.5
+      parent: 1
+  - uid: 219
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 220
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,-4.5
+      parent: 1
+  - uid: 221
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,-1.5
+      parent: 1
+  - uid: 222
+    components:
+    - type: Transform
+      pos: 4.5,-5.5
+      parent: 1
+  - uid: 257
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,5.5
+      parent: 1
+  - uid: 258
+    components:
+    - type: Transform
+      pos: -4.5,-5.5
+      parent: 1
+- proto: MCLightFixtureSmall
+  entities:
+  - uid: 223
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -2.5,5.5
+      parent: 1
+  - uid: 224
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+  - uid: 225
+    components:
+    - type: Transform
+      pos: -3.5,7.5
+      parent: 1
+  - uid: 226
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,10.5
+      parent: 1
+  - uid: 227
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,10.5
+      parent: 1
+  - uid: 228
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -5.5,4.5
+      parent: 1
+  - uid: 229
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -5.5,-2.5
       parent: 1
 - proto: MCMachineVendingEngi
   entities:

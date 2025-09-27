@@ -11,4 +11,7 @@ public sealed partial class MCXenoPlasmaDamageOnHitComponent : Component
 
     [DataField, AutoNetworkedField]
     public float Multiplier;
+
+    [DataField, AutoNetworkedField]
+    public float MissingMultiplier;
 }

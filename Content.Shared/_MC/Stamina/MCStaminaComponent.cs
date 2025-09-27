@@ -17,7 +17,13 @@ public sealed partial class MCStaminaComponent : Component
     public int RegenPerTick = 6;
 
     [DataField, AutoNetworkedField]
-    public int Level = 0;
+    public int Level;
+
+    [DataField, AutoNetworkedField]
+    public double DamageThresholds = -25;
+
+    [DataField, AutoNetworkedField]
+    public double DamageMultiplier = 5;
 
     [DataField, AutoNetworkedField]
     public int[] TierThresholds = [100, 70, 50, 25, 0];

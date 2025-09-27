@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "license": "Taken from https://github.com/tgstation/TerraGov-Marine-Corps/blob/master/icons/obj/lighting.dmi",
+  "copyright": "CC-BY-SA-3.0",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tube0",
+      "directions": 4
+    },
+    {
+      "name": "tube1",
+      "directions": 4
+    },
+    {
+      "name": "tube-empty",
+      "directions": 4
+    },
+    {
+      "name": "tube-burned",
+      "directions": 4
+    },
+    {
+      "name": "tube-broken",
+      "directions": 4
+    },
+    {
+      "name": "rtube0",
+      "directions": 4
+    },
+    {
+      "name": "rtube1",
+      "directions": 4
+    },
+    {
+      "name": "rtube-burned",
+      "directions": 4
+    },
+    {
+      "name": "rtube-broken",
+      "directions": 4
+    },
+    {
+      "name": "tube-construct-stage1",
+      "directions": 4
+    },
+    {
+      "name": "tube-construct-stage2",
+      "directions": 4
+    },
+    {
+      "name": "tube-construct-item"
+    },
+    {
+      "name": "ltube"
+    },
+    {
+      "name": "ltube-burned"
+    },
+    {
+      "name": "ltube-broken"
+    },
+    {
+      "name": "floortube0",
+      "directions": 4
+    },
+    {
+      "name": "floortube1",
+      "directions": 4
+    },
+    {
+      "name": "floortube-broken",
+      "directions": 4
+    },
+    {
+      "name": "floortube-burned",
+      "directions": 4
+    },
+    {
+      "name": "floortube-empty",
+      "directions": 4
+    },
+    {
+      "name": "floortube-construct-stage1",
+      "directions": 4
+    },
+    {
+      "name": "floortube-construct-stage2",
+      "directions": 4
+    },
+    {
+      "name": "btube1",
+      "directions": 4
+    },
+    {
+      "name": "btube0",
+      "directions": 4
+    },
+    {
+      "name": "btube-broken",
+      "directions": 4
+    },
+    {
+      "name": "btube-burned",
+      "directions": 4
+    },
+    {
+      "name": "bslight1",
+      "directions": 4
+    }
+  ]
+}

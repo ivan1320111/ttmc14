@@ -20,6 +20,16 @@
     - HeadTop
     - HeadSide
     - Snout
+  - type: CycleableVisor
+    offIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: sight_up
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
   - type: RMCBulkyArmor
   - type: OverwatchCamera
 
@@ -38,5 +48,10 @@
   name: M10XE pattern marine helmet
   description: A standard M10XE Pattern Helmet. This is a modified version of the M10X helmet, offering an enclosed visor apparatus.
   components:
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      - state: visor
   - type: Sprite
     sprite: _MC/Clothing/Head/Armor/Modular/Xenonauten/Heavy/drab.rsi

@@ -30,8 +30,8 @@
     - Back
   - type: MeleeWeapon
     damage:
-      types:
-        Blunt: 20
+      groups:
+        Brute: 20
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -209,8 +209,8 @@
       shader: unshaded
   - type: Projectile
     damage:
-      types:
-        Piercing: 20
+      groups:
+        Brute: 20
   - type: CMArmorPiercing
     amount: 16
   - type: MCXenoSunderDamageOnHit
