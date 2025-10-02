@@ -12,6 +12,8 @@ public abstract class MCSharedXenoHiveSystem : MCEntitySystemSingleton<MCXenoHiv
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MCXenoHiveSingletonComponent : Component
 {
+    #region Default hive
+
     [DataField, AutoNetworkedField]
     public string DefaultHiveName = "xeno hive";
 
@@ -20,4 +22,6 @@ public sealed partial class MCXenoHiveSingletonComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? DefaultHive;
+
+    #endregion
 }

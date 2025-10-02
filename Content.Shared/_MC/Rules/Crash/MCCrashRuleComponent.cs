@@ -3,12 +3,13 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._MC.Rules;
+namespace Content.Shared._MC.Rules.Crash;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class MCDistressSignalRuleComponent : Component, IRulePlanet
+public sealed partial class MCCrashRuleComponent : Component, IRulePlanet
 {
     [DataField, AutoNetworkedField]
     public EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
@@ -37,6 +38,16 @@ public sealed partial class MCDistressSignalRuleComponent : Component, IRulePlan
     [DataField, AutoNetworkedField]
     public EntityUid? XenoMap { get; set; }
 
+    // Global
+
+#if !FULL_RELEASE
+    [DataField, AutoNetworkedField]
+    public TimeSpan ShuttleCrushTime = TimeSpan.FromSeconds(15);
+#else
+    [DataField, AutoNetworkedField]
+    public TimeSpan ShuttleCrushTime = TimeSpan.FromMinutes(10);
+#endif
+
     // Marine
 
     [DataField, AutoNetworkedField]
@@ -52,4 +63,24 @@ public sealed partial class MCDistressSignalRuleComponent : Component, IRulePlan
 
     [DataField, AutoNetworkedField]
     public TimeSpan XenoSwapTimer = TimeSpan.FromMinutes(5);
+
+    [DataField]
+    public MCCrashRuleResult Result = MCCrashRuleResult.None;
+
+    // TODO: starting_squad
+
+    // TODO: evo_requirements
+    // /datum/xeno_caste/king = 14
+    // /datum/xeno_caste/queen = 10
+    // /datum/xeno_caste/hivelord = 5
+}
+
+[Serializable, NetSerializable]
+public enum MCCrashRuleResult
+{
+    None,
+    MajorMarineVictory,
+    MinorMarineVictory,
+    MajorXenoVictory,
+    MinorXenoVictory,
 }

@@ -5,13 +5,18 @@ using Content.Server.GameTicking;
 using Content.Server.Maps;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
+using Content.Server.RoundEnd;
+using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
-using Content.Shared._MC.Rules;
 using Content.Shared._MC.Rules.Crash;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
+using Content.Shared.GameTicking;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Server.Player;
@@ -19,9 +24,9 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
-namespace Content.Server._MC.Rules;
+namespace Content.Server._MC.Rules.Crash;
 
-public sealed class MCDistressSignalRuleSystem : MCRuleSystem<MCDistressSignalRuleComponent>
+public sealed partial class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponent>
 {
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -34,6 +39,8 @@ public sealed class MCDistressSignalRuleSystem : MCRuleSystem<MCDistressSignalRu
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
 
     [Dependency] private readonly MCXenoHiveSystem _mcXenoHive = default!;
     [Dependency] private readonly MCXenoSpawnSystem _mcXenoSpawn = default!;
@@ -42,14 +49,40 @@ public sealed class MCDistressSignalRuleSystem : MCRuleSystem<MCDistressSignalRu
     {
         base.Initialize();
 
+        SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
+
         SubscribeLocalEvent<LoadingMapsEvent>(OnMapLoading);
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
+
+        SubscribeLocalEvent<MarineComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<MarineComponent, ComponentRemove>(OnCompRemove);
+    }
+
+    private void OnRoundEndMessage(RoundEndMessageEvent ev)
+    {
+
+    }
+
+    private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
+    {
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        CheckRoundShouldEnd();
+    }
+
+    private void OnCompRemove<T>(Entity<T> ent, ref ComponentRemove args) where T : IComponent?
+    {
+        CheckRoundShouldEnd();
     }
 
     private void OnMapLoading(LoadingMapsEvent ev)
     {
-        if (!GameTicker.IsGameRuleAdded<MCDistressSignalRuleComponent>())
+        if (!GameTicker.IsGameRuleAdded<MCCrashRuleComponent>())
             return;
+
+        ev.Maps.Clear();
+        ev.Maps.Add(_prototype.Index<GameMapPrototype>("MCCanterbury"));
 
         _mcXenoSpawn.SelectRandomPlanet();
         GameTicker.UpdateInfoText();
@@ -64,7 +97,7 @@ public sealed class MCDistressSignalRuleSystem : MCRuleSystem<MCDistressSignalRu
                 continue;
 
             OperationName = GetRandomOperationName();
-            if (!_mcXenoSpawn.SpawnXenoMap<MCDistressSignalRuleComponent>((uid, comp)))
+            if (!_mcXenoSpawn.SpawnXenoMap<MCCrashRuleComponent>((uid, comp)))
                 continue;
 
             StartBioscan();
@@ -74,6 +107,8 @@ public sealed class MCDistressSignalRuleSystem : MCRuleSystem<MCDistressSignalRu
 
             RefreshIFF(comp.MarineFaction);
             RefreshFaxes();
+
+            CrashShuttle(comp.ShuttleCrushTime);
 
             var xenoSpawnPoints = GetEntities<XenoSpawnPointComponent>();
 
@@ -236,8 +271,18 @@ public sealed class MCDistressSignalRuleSystem : MCRuleSystem<MCDistressSignalRu
         }
     }
 
-    private void CheckRoundShouldEnd()
+    private void CrashShuttle(TimeSpan flyTime)
     {
+        var points = GetEntities<Shared._MC.Rules.Crash.MCCrashPointComponent>();
+        if (points.Count == 0)
+            return;
 
+        var point = _random.Pick(points);
+        var query = EntityQueryEnumerator<AlmayerComponent, ShuttleComponent>();
+        while (query.MoveNext(out var uid, out _, out var shuttle))
+        {
+            _shuttle.FTLToCoordinates(uid, shuttle, Transform(point).Coordinates.Offset(Comp<Shared._MC.Rules.Crash.MCCrashPointComponent>(point).Offset), Angle.Zero, hyperspaceTime: (float) flyTime.TotalSeconds);
+            return;
+        }
     }
 }
