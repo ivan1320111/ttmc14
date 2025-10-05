@@ -32,6 +32,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: MCSendOrders
     - type: MarineOrders
     - type: Skills
       skills:

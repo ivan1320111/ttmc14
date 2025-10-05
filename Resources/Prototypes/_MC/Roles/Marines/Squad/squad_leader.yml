@@ -43,6 +43,7 @@
         RMCSkillJtac: 1
         RMCSkillFireman: 1
     - type: SquadArmorWearer
+    - type: MCSendOrders
     - type: JobPrefix
       prefix: mc-job-prefix-leader
     - type: TacticalMapIcon

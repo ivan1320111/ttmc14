@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 10,
+    "y": 10
+  },
+  "states": [
+    {
+      "name": "attack",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "defend",
+      "delays": [
+        [
+          0.25,
+          0.25
+        ]
+      ]
+    },
+    {
+      "name": "retreat",
+      "delays": [
+        [
+          0.25,
+          0.25
+        ]
+      ]
+    },
+    {
+      "name": "rally",
+      "delays": [
+        [
+          0.25,
+          0.25
+        ]
+      ]
+    }
+  ]
+}
