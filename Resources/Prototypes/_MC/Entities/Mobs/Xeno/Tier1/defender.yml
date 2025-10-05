@@ -37,7 +37,6 @@
     - MCXenoLarva
     canBeDevolvedByOther: false
   - type: XenoEvolution
-    canEvolveWithoutGranter: true
     actionId: MCActionXenoEvolve
     max: 225
     evolvesTo:

@@ -88,7 +88,6 @@
     - MCWallXenoResinThickHardy
     - MCDoorXenoResinThick
   - type: XenoEvolution
-    canEvolveWithoutGranter: true
     max: 200
   - type: XenoInhands
     prefix: drone
@@ -125,7 +124,6 @@
     - MCActionXenoAcidicSalve
     - MCActionXenoRecycle
   - type: XenoEvolution
-    canEvolveWithoutGranter: true
     actionId: MCActionXenoEvolve
     max: 225
     evolvesTo:

@@ -41,7 +41,6 @@
     - MCActionXenoAcidCharge
     hudOffset: -0.15,0.25
   - type: XenoEvolution
-    canEvolveWithoutGranter: true
     actionId: MCActionXenoEvolve
     max: 225
     evolvesTo:

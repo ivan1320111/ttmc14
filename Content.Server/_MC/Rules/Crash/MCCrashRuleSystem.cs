@@ -100,6 +100,13 @@ public sealed partial class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponen
             if (!_mcXenoSpawn.SpawnXenoMap<MCCrashRuleComponent>((uid, comp)))
                 continue;
 
+            // Hive settings
+            if (_mcXenoHive.DefaultHive is not null)
+            {
+                _mcXenoHive.SetCanEvolveWithoutLeader(_mcXenoHive.DefaultHive.Value, true);
+                _mcXenoHive.SetCanCollapse(_mcXenoHive.DefaultHive.Value, false);
+            }
+
             StartBioscan();
 
             SpawnAdminAreas(comp.Thunderdome);

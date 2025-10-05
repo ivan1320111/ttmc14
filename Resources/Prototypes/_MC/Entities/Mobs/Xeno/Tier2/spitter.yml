@@ -42,7 +42,6 @@
     - MCActionXenoPlaceTrap
     hudOffset: -0.1,0.1
   - type: XenoEvolution
-    canEvolveWithoutGranter: true
     actionId: MCActionXenoEvolve
     max: 225
     evolvesTo:

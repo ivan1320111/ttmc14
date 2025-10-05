@@ -53,7 +53,6 @@
     - MCActionXenoAcidStrong
     hudOffset: -0.1,0.1
   - type: XenoEvolution
-    canEvolveWithoutGranter: true
     actionId: MCActionXenoEvolve
     evolvesToWithoutPoints:
     - MCXenoQueen

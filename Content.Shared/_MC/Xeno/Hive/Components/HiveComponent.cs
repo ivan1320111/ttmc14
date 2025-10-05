@@ -8,4 +8,31 @@ public sealed partial class HiveComponent
 {
     [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<MCXenoHivePsypointTypePrototype>, int> Psypoints = new();
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan RespawnTime = TimeSpan.FromMinutes(3);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan CasteSwapTime = TimeSpan.FromMinutes(5);
+
+    [DataField, AutoNetworkedField]
+    public bool CanCollapse = true;
+
+    [DataField, AutoNetworkedField]
+    public bool CanEvolveWithoutLeader;
+
+    [DataField, AutoNetworkedField]
+    public List<EntProtoId> CaseEvolutionBlock = new()
+    {
+        // "MCXenoHiveMind",
+        "MCXenoWraith",
+    };
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId, int> CasteEvolutionCountRequire = new()
+    {
+        { "MCXenoHivelord", 5 },
+        { "MCXenoQueen", 10 },
+        // { "MCXenoKing", 14 },
+    };
 }
