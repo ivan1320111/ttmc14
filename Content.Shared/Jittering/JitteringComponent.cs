@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Shared._MC.Xeno.Abilities.Psydrain;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Jittering;

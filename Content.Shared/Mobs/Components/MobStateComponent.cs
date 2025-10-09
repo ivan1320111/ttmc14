@@ -1,6 +1,5 @@
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
-using Content.Shared._MC.Xeno.Abilities.Psydrain;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Mobs.Components
@@ -14,15 +13,12 @@ namespace Content.Shared.Mobs.Components
     [RegisterComponent]
     [NetworkedComponent]
     [AutoGenerateComponentState]
-    [Access(typeof(MobStateSystem), typeof(MobThresholdSystem), typeof(MCXenoPsydrainSystem))]
+    [Access(typeof(MobStateSystem), typeof(MobThresholdSystem))]
     public sealed partial class MobStateComponent : Component
     {
         //default mobstate is always the lowest state level
         [AutoNetworkedField, ViewVariables]
         public MobState CurrentState { get; set; } = MobState.Alive;
-
-        [DataField, AutoNetworkedField]
-        public bool PsyDrained;
 
         [DataField]
         [AutoNetworkedField]
