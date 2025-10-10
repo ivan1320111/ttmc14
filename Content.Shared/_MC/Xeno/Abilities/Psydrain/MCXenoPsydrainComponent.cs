@@ -1,9 +1,7 @@
-﻿using Content.Shared._MC.Xeno.Hive.Prototypes;
-using Content.Shared.Damage;
+﻿using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._MC.Xeno.Abilities.Psydrain;
 

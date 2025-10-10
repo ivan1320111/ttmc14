@@ -85,5 +85,11 @@ public sealed partial class HiveComponent : Component
     public FixedPoint2 LateJoinMarines;
 
     [DataField, AutoNetworkedField]
+    public int LarvaPoints;
+
+    [DataField, AutoNetworkedField]
+    public int NeedLarvaPointsForBurrowedLarva = 8;
+
+    [DataField, AutoNetworkedField]
     public EntProtoId BurrowedLarvaId = "CMXenoLarva";
 }

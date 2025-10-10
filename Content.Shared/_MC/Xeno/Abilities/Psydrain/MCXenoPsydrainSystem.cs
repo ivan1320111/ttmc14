@@ -5,16 +5,13 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
-using Content.Shared.Humanoid;
 using Content.Shared.Jittering;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Mobs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._MC.Xeno.Abilities.Psydrain;
 
@@ -36,6 +33,18 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
     [Dependency] private readonly MCXenoBiomassSystem _mcXenoBiomass = default!;
 
     private EntityQuery<MCXenoPsydrainableComponent> _psydrainableQuery;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        _psydrainableQuery = GetEntityQuery<MCXenoPsydrainableComponent>();
+
+        SubscribeLocalEvent<MCXenoPsydrainComponent, MCXenoPsydrainActionEvent>(OnAction);
+        SubscribeLocalEvent<MCXenoPsydrainComponent, MCXenoPsydrainDoAfterEvent>(OnDoAfter);
+
+        SubscribeLocalEvent<MCXenoPsydrainableComponent, MobStateChangedEvent>(OnPsydrainableStateChanged);
+    }
 
     private void OnAction(Entity<MCXenoPsydrainComponent> entity, ref MCXenoPsydrainActionEvent args)
     {
@@ -99,22 +108,9 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
 
         _popup.PopupClient(Loc.GetString("doAfter-canceled-owner"), entity, entity, PopupType.MediumXeno);
 
-        // No, it doesn't work that way.
-        // You need to save the result _audio.PlayPvs(entity.Comp.SoundDrain, entity);
-        // and stop it, but I'm too lazy to do that. TODO
-        // _audio.Stop(entity);
-    }
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _psydrainableQuery = GetEntityQuery<MCXenoPsydrainableComponent>();
-
-        SubscribeLocalEvent<MCXenoPsydrainComponent, MCXenoPsydrainActionEvent>(OnAction);
-        SubscribeLocalEvent<MCXenoPsydrainComponent, MCXenoPsydrainDoAfterEvent>(OnDoAfter);
-
-        SubscribeLocalEvent<MCXenoPsydrainableComponent, MobStateChangedEvent>(OnPsydrainableStateChanged);
+       // TODO: Fix this
+        //if (sound.HasValue)
+            //_audio.Stop(entity);
     }
 
     private void OnDoAfter(Entity<MCXenoPsydrainComponent> entity, ref MCXenoPsydrainDoAfterEvent args)
@@ -155,7 +151,7 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         _damageable.TryChangeDamage(target, entity.Comp.Damage);
 
         // Biomass
-        _mcXenoBiomass.Add(target, entity.Comp.BiomassGain);
+        _mcXenoBiomass.Add(entity.Owner, entity.Comp.BiomassGain);
 
         // Plasma
         _xenoPlasma.TryRemovePlasma(entity.Owner, entity.Comp.PlasmaNeed);
@@ -176,6 +172,7 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
             $"at {Transform(target).Coordinates:coordinates}. " +
             $"Larva points gained: {entity.Comp.LarvaPointsGain}, " +
             $"Psy points gained: {entity.Comp.PsypointGain}, " +
+            $"Biomass points gained: {entity.Comp.BiomassGain}, " +
             $"Damage applied: {entity.Comp.Damage}");
     }
 

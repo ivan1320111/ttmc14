@@ -96,6 +96,22 @@ public partial class SharedXenoHiveSystem
         return entity.Comp.LarvaPoints;
     }
 
+    public void AddBurrowedLarvaCount(Entity<HiveComponent> entity, int value)
+    {
+        SetBurrowedLarvaCount(entity, GetBurrowedLarvaCount(entity) + value);
+    }
+
+    public void SetBurrowedLarvaCount(Entity<HiveComponent> entity, int value)
+    {
+        entity.Comp.BurrowedLarva = value;
+        Dirty(entity);
+    }
+
+    public int GetBurrowedLarvaCount(Entity<HiveComponent> entity)
+    {
+        return entity.Comp.BurrowedLarva;
+    }
+
     public int GetLarvapointsFromOwner(EntityUid uid)
     {
         if (!TryComp<HiveMemberComponent>(uid, out var hiveMemberComponent))
