@@ -44,35 +44,11 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         var target = args.Target;
 
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
         if (args.Handled)
 =======
         if (!_rmcActions.TryUseAction(entity, args.Action, entity))
         {
             args.Handled = true;
->>>>>>> Stashed changes
-=======
-        if (!_rmcActions.TryUseAction(entity, args.Action, entity))
-        {
-            args.Handled = true;
-            return;
-        }
-
-        if (!_xenoPlasma.HasPlasmaPopup(entity.Owner, entity.Comp.PlasmaNeed))
-        {
-            args.Handled = true;
-            return;
-        }
-
-        if (!TryComp<MobStateComponent>(target, out var mobState))
-        {
-            args.Handled = true;
-            return;
-        }
-
-        if (!_xenoHive.HasHive(entity.Owner))
-        {
-            _popup.PopupEntity(Loc.GetString("psydrain-dont-have-hive"), entity, entity, PopupType.MediumXeno);
 >>>>>>> Stashed changes
             return;
         }
@@ -80,7 +56,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
 <<<<<<< Updated upstream
         if (!_psydrainableQuery.TryComp(target, out var psydrainableComponent))
         {
-<<<<<<< Updated upstream
             _popup.PopupClient(Loc.GetString("psydrain-not-human"), entity, entity, PopupType.MediumXeno);
 =======
         if (!_xenoPlasma.HasPlasmaPopup(entity.Owner, entity.Comp.PlasmaNeed))
@@ -107,8 +82,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
 <<<<<<< Updated upstream
             _popup.PopupClient(Loc.GetString("someone-already-psydrained"), entity, entity, PopupType.MediumXeno);
 =======
-=======
->>>>>>> Stashed changes
             _popup.PopupEntity(Loc.GetString("psydrain-not-human"), entity, entity, PopupType.MediumXeno);
             return;
         }
@@ -116,9 +89,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         if (mobState.PsyDrained)
         {
             _popup.PopupEntity(Loc.GetString("someone-already-psydrained"), entity, entity, PopupType.MediumXeno);
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
             return;
         }
@@ -126,12 +96,8 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         if (!_mobState.IsDead(target))
         {
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
             var notDead = Loc.GetString("psydrain-not-dead");
             _popup.PopupClient(notDead, entity, entity, PopupType.MediumXeno);
-=======
-            _popup.PopupEntity(Loc.GetString("psydrain-not-dead"), entity, entity, PopupType.MediumXeno);
->>>>>>> Stashed changes
 =======
             _popup.PopupEntity(Loc.GetString("psydrain-not-dead"), entity, entity, PopupType.MediumXeno);
 >>>>>>> Stashed changes
@@ -140,7 +106,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
 
         if (_flammable.IsOnFire(entity.Owner))
         {
-<<<<<<< Updated upstream
 <<<<<<< Updated upstream
             _popup.PopupClient(Loc.GetString("psydrain-our-fire"), entity, entity, PopupType.MediumXeno);
             return;
@@ -166,12 +131,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         }
 
 >>>>>>> Stashed changes
-=======
-            _popup.PopupEntity(Loc.GetString("psydrain-our-fire"), entity, entity, PopupType.MediumXeno);
-            return;
-        }
-
->>>>>>> Stashed changes
         var ev = new MCXenoPsydrainDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, entity, entity.Comp.Delay, ev, entity, target)
         {
@@ -183,7 +142,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
             BreakOnRest = true,
         };
 
-<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         if (_doAfter.TryStartDoAfter(doAfter))
             return;
@@ -207,8 +165,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
 
         SubscribeLocalEvent<MCXenoPsydrainableComponent, MobStateChangedEvent>(OnPsydrainableStateChanged);
 =======
-=======
->>>>>>> Stashed changes
         _popup.PopupEntity(Loc.GetString("being-psydrained", ("entity", entity), ("target", target)),
             entity,
             entity,
@@ -217,9 +173,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
 
         if (_doAfter.TryStartDoAfter(doAfter))
             args.Handled = true;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
     }
 
@@ -233,9 +186,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
             return;
 
         if (args.Cancelled || args.Handled)
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
             return;
 
@@ -273,9 +223,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         _damageable.TryChangeDamage(target, entity.Comp.Damage);
 =======
         _damageable.TryChangeDamage(target, entity.Comp.CloneDamage);
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 
         // Biomass
@@ -298,9 +245,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         _xenoHive.AddPsypointsFromOwner(entity, entity.Comp.PsypointType, entity.Comp.PsypointGain);
         _mcXenoBiomassSystem.AddBiomassValue(biomassEntity, entity.Comp.BiomassGain);
         mobState.PsyDrained = true;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 
         _adminLogger.Add(LogType.Action,
@@ -309,7 +253,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
             $"at {Transform(target).Coordinates:coordinates}. " +
             $"Larva points gained: {entity.Comp.LarvaPointsGain}, " +
             $"Psy points gained: {entity.Comp.PsypointGain}, " +
-<<<<<<< Updated upstream
 <<<<<<< Updated upstream
             $"Damage applied: {entity.Comp.Damage}");
     }
@@ -322,8 +265,6 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         ent.Comp.Available = true;
         Dirty(ent);
 =======
-=======
->>>>>>> Stashed changes
             $"Biomass points gained: {entity.Comp.BiomassGain}, " +
             $"Damage applied: {entity.Comp.CloneDamage}");
 >>>>>>> Stashed changes
