@@ -14,7 +14,6 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Mobs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._MC.Xeno.Abilities.Psydrain;
 
@@ -39,32 +38,75 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
 
     private void OnAction(Entity<MCXenoPsydrainComponent> entity, ref MCXenoPsydrainActionEvent args)
     {
-        var target = args.Target;
-
         if (args.Handled)
             return;
 
+        var target = args.Target;
+
+<<<<<<< Updated upstream
+        if (args.Handled)
+=======
+        if (!_rmcActions.TryUseAction(entity, args.Action, entity))
+        {
+            args.Handled = true;
+>>>>>>> Stashed changes
+            return;
+        }
+
+<<<<<<< Updated upstream
         if (!_psydrainableQuery.TryComp(target, out var psydrainableComponent))
         {
             _popup.PopupClient(Loc.GetString("psydrain-not-human"), entity, entity, PopupType.MediumXeno);
+=======
+        if (!_xenoPlasma.HasPlasmaPopup(entity.Owner, entity.Comp.PlasmaNeed))
+        {
+            args.Handled = true;
+            return;
+        }
+
+        if (!TryComp<MobStateComponent>(target, out var mobState))
+        {
+            args.Handled = true;
+            return;
+        }
+
+        if (!_xenoHive.HasHive(entity.Owner))
+        {
+            _popup.PopupEntity(Loc.GetString("psydrain-dont-have-hive"), entity, entity, PopupType.MediumXeno);
+>>>>>>> Stashed changes
             return;
         }
 
         if (!psydrainableComponent.Available)
         {
+<<<<<<< Updated upstream
             _popup.PopupClient(Loc.GetString("someone-already-psydrained"), entity, entity, PopupType.MediumXeno);
+=======
+            _popup.PopupEntity(Loc.GetString("psydrain-not-human"), entity, entity, PopupType.MediumXeno);
+            return;
+        }
+
+        if (mobState.PsyDrained)
+        {
+            _popup.PopupEntity(Loc.GetString("someone-already-psydrained"), entity, entity, PopupType.MediumXeno);
+>>>>>>> Stashed changes
             return;
         }
 
         if (!_mobState.IsDead(target))
         {
+<<<<<<< Updated upstream
             var notDead = Loc.GetString("psydrain-not-dead");
             _popup.PopupClient(notDead, entity, entity, PopupType.MediumXeno);
+=======
+            _popup.PopupEntity(Loc.GetString("psydrain-not-dead"), entity, entity, PopupType.MediumXeno);
+>>>>>>> Stashed changes
             return;
         }
 
         if (_flammable.IsOnFire(entity.Owner))
         {
+<<<<<<< Updated upstream
             _popup.PopupClient(Loc.GetString("psydrain-our-fire"), entity, entity, PopupType.MediumXeno);
             return;
         }
@@ -83,17 +125,24 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("being-psydrained", ("entity", entity), ("target", target)), entity, entity, PopupType.MediumXeno);
         _audio.PlayPredicted(entity.Comp.SoundDrain, entity, entity);
 
+=======
+            _popup.PopupEntity(Loc.GetString("psydrain-our-fire"), entity, entity, PopupType.MediumXeno);
+            return;
+        }
+
+>>>>>>> Stashed changes
         var ev = new MCXenoPsydrainDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, entity, entity.Comp.Delay, ev, entity, target)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
-            BlockDuplicate = true,
             CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
             RequireCanInteract = true,
             BreakOnRest = true,
         };
 
+<<<<<<< Updated upstream
         if (_doAfter.TryStartDoAfter(doAfter))
             return;
 
@@ -115,11 +164,29 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         SubscribeLocalEvent<MCXenoPsydrainComponent, MCXenoPsydrainDoAfterEvent>(OnDoAfter);
 
         SubscribeLocalEvent<MCXenoPsydrainableComponent, MobStateChangedEvent>(OnPsydrainableStateChanged);
+=======
+        _popup.PopupEntity(Loc.GetString("being-psydrained", ("entity", entity), ("target", target)),
+            entity,
+            entity,
+            PopupType.MediumXeno);
+        _audio.PlayPvs(entity.Comp.SoundDrain, entity);
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+            args.Handled = true;
+>>>>>>> Stashed changes
     }
+
 
     private void OnDoAfter(Entity<MCXenoPsydrainComponent> entity, ref MCXenoPsydrainDoAfterEvent args)
     {
+<<<<<<< Updated upstream
         if (args.Handled)
+=======
+        if (args.Target is not { } target)
+            return;
+
+        if (args.Cancelled || args.Handled)
+>>>>>>> Stashed changes
             return;
 
         if (args.Cancelled)
@@ -151,14 +218,19 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         _jittering.DoJitter(entity, entity.Comp.JitteringDelayOwner, true, entity.Comp.AmplitudeOwner, entity.Comp.FrequencyOwner);
         _jittering.DoJitter(target, entity.Comp.JitteringDelayTarget, true, entity.Comp.AmplitudeTarget, entity.Comp.FrequencyTarget);
 
+<<<<<<< Updated upstream
         // Damage
         _damageable.TryChangeDamage(target, entity.Comp.Damage);
+=======
+        _damageable.TryChangeDamage(target, entity.Comp.CloneDamage);
+>>>>>>> Stashed changes
 
         // Biomass
         _mcXenoBiomass.Add(target, entity.Comp.BiomassGain);
 
         // Plasma
         _xenoPlasma.TryRemovePlasma(entity.Owner, entity.Comp.PlasmaNeed);
+<<<<<<< Updated upstream
 
         // Hive reward
         _xenoHive.AddLarvaPointsOwner(entity, entity.Comp.LarvaPointsGain);
@@ -169,6 +241,11 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
         var psypointReward = int.Clamp(rewardMin + (MCStatusSystem.HighPlayerPop - _mcStatus.ActivePlayerCount) / MCStatusSystem.HighPlayerPop * (rewardMax - rewardMin), rewardMin, rewardMax);
         _xenoHive.AddPsypointsFromOwner(entity, "Strategic", psypointReward);
         _xenoHive.AddPsypointsFromOwner(entity, "Tactical", psypointReward / 4);
+=======
+        _xenoHive.AddPsypointsFromOwner(entity, entity.Comp.PsypointType, entity.Comp.PsypointGain);
+        _mcXenoBiomassSystem.AddBiomassValue(biomassEntity, entity.Comp.BiomassGain);
+        mobState.PsyDrained = true;
+>>>>>>> Stashed changes
 
         _adminLogger.Add(LogType.Action,
             LogImpact.Medium,
@@ -176,6 +253,7 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
             $"at {Transform(target).Coordinates:coordinates}. " +
             $"Larva points gained: {entity.Comp.LarvaPointsGain}, " +
             $"Psy points gained: {entity.Comp.PsypointGain}, " +
+<<<<<<< Updated upstream
             $"Damage applied: {entity.Comp.Damage}");
     }
 
@@ -186,5 +264,9 @@ public sealed class MCXenoPsydrainSystem : EntitySystem
 
         ent.Comp.Available = true;
         Dirty(ent);
+=======
+            $"Biomass points gained: {entity.Comp.BiomassGain}, " +
+            $"Damage applied: {entity.Comp.CloneDamage}");
+>>>>>>> Stashed changes
     }
 }

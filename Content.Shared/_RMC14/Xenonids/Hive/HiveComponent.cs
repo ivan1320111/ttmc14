@@ -1,3 +1,4 @@
+using Content.Shared._MC.Xeno.LarvaPoints;
 using Content.Shared._MC.Xeno.Evolution;
 using Content.Shared._MC.Xeno.Hive.Systems;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -11,7 +12,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoPylonSystem), typeof(XenoTunnelSystem), typeof(MCSharedXenoHiveSystem), typeof(MCXenoEvolutionSystem))]
+[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoPylonSystem), typeof(XenoTunnelSystem), typeof(MCSharedXenoHiveSystem), typeof(MCXenoEvolutionSystem), typeof(MCXenoLarvaPointsSystem))]
 public sealed partial class HiveComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -86,4 +87,13 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId BurrowedLarvaId = "CMXenoLarva";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan Offset;
+
+    [DataField, AutoNetworkedField]
+    public int LarvaPoints;
+
+    [DataField, AutoNetworkedField]
+    public int NeedLarvaPointsForBurrowedLarva = 8;
 }
