@@ -39,4 +39,10 @@ public sealed partial class MCXenoHiveComponent : Component
         { "MCXenoQueen", 10 },
         // { "MCXenoKing", 14 },
     };
+
+    [DataField, AutoNetworkedField]
+    public int BurrowedLarva;
+
+    [DataField, AutoNetworkedField]
+    public int BurrowedLarvaSlotFactor = 4;
 }

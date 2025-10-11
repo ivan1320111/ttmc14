@@ -57,6 +57,8 @@
   - type: TargetAction
   - type: EntityTargetAction
     event: !type:MCXenoPsydrainActionEvent
+  - type: XenoActionPlasma
+    cost: 50
 
 - type: entity
   parent: ActionXenoBase

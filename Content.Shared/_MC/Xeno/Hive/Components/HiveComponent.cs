@@ -35,4 +35,16 @@ public sealed partial class HiveComponent
         { "MCXenoQueen", 10 },
         // { "MCXenoKing", 14 },
     };
+
+    [DataField, AutoNetworkedField]
+    public int LarvaPoints;
+
+    [DataField, AutoNetworkedField]
+    public int LarvaPointsPerBurrowedLarva = 8;
+
+    [DataField, AutoNetworkedField]
+    public int BurrowedLarva;
+
+    [DataField, AutoNetworkedField]
+    public int BurrowedLarvaSlotFactor = 4;
 }

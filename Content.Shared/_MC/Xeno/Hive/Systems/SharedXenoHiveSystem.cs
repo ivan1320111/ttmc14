@@ -6,6 +6,8 @@ namespace Content.Shared._RMC14.Xenonids.Hive;
 
 public partial class SharedXenoHiveSystem
 {
+    #region Psypoints
+
     public void AddPsypoints(Entity<HiveComponent> entity, ProtoId<MCXenoHivePsypointTypePrototype> id, int value)
     {
         SetPsypoints(entity, id, GetPsypoints(entity, id) + value);
@@ -64,14 +66,18 @@ public partial class SharedXenoHiveSystem
         return value < GetPsypointsFromOwner(uid, id);
     }
 
+    #endregion
+
+    #region LarvaPoints
+
     public void AddLarvaPointsOwner(EntityUid uid, int value)
     {
-        SetLarvaPointsFromOwner(uid, GetLarvapointsFromOwner(uid) + value);
+        SetLarvaPointsFromOwner(uid, GetLarvaPointsFromOwner(uid) + value);
     }
 
     public void AddLarvaPoints(Entity<HiveComponent> entity, int value)
     {
-        SetLarvaPoints(entity, GetLarvapoints(entity) + value);
+        SetLarvaPoints(entity, GetLarvaPoints(entity) + value);
     }
 
     public void SetLarvaPointsFromOwner(EntityUid uid, int value)
@@ -87,11 +93,17 @@ public partial class SharedXenoHiveSystem
 
     public void SetLarvaPoints(Entity<HiveComponent> entity, int value)
     {
+        if (value >= entity.Comp.LarvaPointsPerBurrowedLarva)
+        {
+            IncreaseBurrowedLarva(entity, value / entity.Comp.LarvaPointsPerBurrowedLarva);
+            value %= entity.Comp.LarvaPointsPerBurrowedLarva;
+        }
+
         entity.Comp.LarvaPoints = value;
         Dirty(entity);
     }
 
-    public int GetLarvapoints(Entity<HiveComponent> entity)
+    public int GetLarvaPoints(Entity<HiveComponent> entity)
     {
         return entity.Comp.LarvaPoints;
     }
@@ -112,13 +124,15 @@ public partial class SharedXenoHiveSystem
         return entity.Comp.BurrowedLarva;
     }
 
-    public int GetLarvapointsFromOwner(EntityUid uid)
+    public int GetLarvaPointsFromOwner(EntityUid uid)
     {
         if (!TryComp<HiveMemberComponent>(uid, out var hiveMemberComponent))
             return 0;
 
         return !TryComp<HiveComponent>(hiveMemberComponent.Hive, out var hiveComponent)
             ? 0
-            : GetLarvapoints((hiveMemberComponent.Hive.Value, hiveComponent));
+            : GetLarvaPoints((hiveMemberComponent.Hive.Value, hiveComponent));
     }
+
+    #endregion
 }
