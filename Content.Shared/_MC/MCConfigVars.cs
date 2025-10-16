@@ -19,4 +19,26 @@ public sealed class MCConfigVars : CVars
 
     public static readonly CVarDef<bool> MCStaminaDamageOnRun =
         CVarDef.Create("mc.stamina_damage_on_run", false, CVar.SERVER | CVar.REPLICATED);
+
+    /**
+     * Round schedule
+     */
+
+    public static readonly CVarDef<bool> MCRoundSchedule =
+        CVarDef.Create("mc.round_schedule", false, CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> MCRoundScheduleTimezone =
+        CVarDef.Create("mc.round_schedule_timezone", "Russian Standard Time", CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> MCRoundScheduleUpdateFrequency =
+        CVarDef.Create("mc.round_schedule_update_frequency", 60f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> MCRoundScheduleDays =
+        CVarDef.Create("mc.round_schedule_days", "Saturday,Sunday", CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> MCRoundScheduleStart =
+        CVarDef.Create("mc.round_schedule_start", "17:00", CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> MCRoundScheduleEnd =
+        CVarDef.Create("mc.round_schedule_end", "24:00", CVar.SERVERONLY);
 }
