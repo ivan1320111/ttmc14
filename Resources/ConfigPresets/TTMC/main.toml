@@ -1,8 +1,16 @@
+[mc.round_schedule]
+enabled = true
+timezone = "Russian Standard Time"
+update_frequency = 60
+days = "Saturday,Sunday"
+start = "17:00"
+end = "24:00"
+
 [accessibility]
 screen_shake_intensity = 1
 
 [admin]
-deadmin_on_join = true
+deadmin_on_join = false
 see_own_notes = true
 server_ban_erase_player = true
 new_player_threshold = 600
