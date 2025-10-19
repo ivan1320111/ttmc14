@@ -2,3 +2,10 @@
   parent: BaseItem
   id: MCItem
   abstract: true
+  categories: [ MCContent ]
+
+- type: entity
+  parent: BaseStorageItem
+  id: MCStorageItem
+  abstract: true
+  categories: [ MCContent ]

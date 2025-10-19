@@ -1,8 +1,8 @@
 - type: entity
-  abstract: true
-  parent: BaseStorageItem
+  parent: MCStorageItem
   id: MCCase
   name: case
+  abstract: true
   components:
   - type: Appearance
   - type: Sprite

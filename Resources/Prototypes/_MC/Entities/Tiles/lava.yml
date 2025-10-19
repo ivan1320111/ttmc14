@@ -1,7 +1,7 @@
 - type: entity
   id: MCFloorLavaEntity
   name: lava
-  suffix: MC
+  categories: [ MCContent ]
   placement:
     mode: SnapgridCenter
     snap:
