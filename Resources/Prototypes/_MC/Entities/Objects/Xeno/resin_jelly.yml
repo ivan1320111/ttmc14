@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: MCItem
   id: MCXenoResinJelly
   name: resin jelly
   description: A foul, viscous resin jelly that doesnt seem to burn easily.

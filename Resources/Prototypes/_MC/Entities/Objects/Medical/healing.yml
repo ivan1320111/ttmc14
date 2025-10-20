@@ -19,7 +19,7 @@
 
 # base
 - type: entity
-  parent: BaseItem
+  parent: MCItem
   id: MCBaseHealingItem
   abstract: true
   components:

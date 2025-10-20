@@ -13,9 +13,9 @@
 
 # Base Attachable
 - type: entity
-  parent: BaseItem
-  abstract: true
+  parent: MCItem
   id: MCAttachableBase
+  abstract: true
   components:
   - type: Item
     size: Small
@@ -24,8 +24,8 @@
 
 - type: entity
   parent: MCAttachableBase
-  abstract: true
   id: MCAttachableToggleableBase
+  abstract: true
   components:
   - type: AttachableToggleable
   - type: UseDelay

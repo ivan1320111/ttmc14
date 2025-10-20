@@ -1,6 +1,7 @@
 - type: entity
   id: MCXenoNoMeleeBase
   abstract: true
+  categories: [ MCContent ]
   components:
   - type: Flammable
     fireSpread: false

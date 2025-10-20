@@ -17,8 +17,9 @@
   id: MCSpear
 
 - type: entity
-  abstract: true
   id: MCBaseMeleeWeapon
+  categories: [ MCContent ]
+  abstract: true
   components:
   - type: MeleeDamageMultiplier
     whitelist:

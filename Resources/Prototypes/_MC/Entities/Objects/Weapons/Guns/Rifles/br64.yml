@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  parent: [ MCWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: MCWeaponBR64
   name: BR-64 SCA battle rifle
   description: The San Cristo Arms BR-64 is the TerraGov Marine Corps main battle rifle. It is known for its consistent ability to perform well at most ranges, and medium range stopping power with bursts. It is mostly used by people who prefer a bigger round than the average. Uses 10x26.5smm caseless caliber.

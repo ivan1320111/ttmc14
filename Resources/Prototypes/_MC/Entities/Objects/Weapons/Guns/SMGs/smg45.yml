@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBaseWeaponSMG
+  parent: MCWeaponSMG
   name: SMG-45 heavy submachinegun
   id: MCWeaponSMG45
   description: The SMG-45 is a heavier than usual subgun used by the TerraGov Marine Corps. Best known for carrying a punch within a small package. It's usually carried by troops who want a lightweight firearm to rush with while beating a mean punch, however it struggles at range. It uses .41 AE caseless rounds.

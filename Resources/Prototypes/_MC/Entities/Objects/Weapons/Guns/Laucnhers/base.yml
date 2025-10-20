@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  parent: [ MCItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: MCWeaponGrenadeLauncher
   components:
   - type: Item

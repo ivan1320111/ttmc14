@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: MarkerBase
+  parent: MCMarker
   id: MCMarkerERTCrash
   name: ERT marker crash
   components:

@@ -1,8 +1,7 @@
 - type: entity
-  name: pill
-  parent: BaseItem
+  parent: MCItem
   id: MCPill
-  suffix: MC
+  name: pill
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Chemistry/pills.rsi

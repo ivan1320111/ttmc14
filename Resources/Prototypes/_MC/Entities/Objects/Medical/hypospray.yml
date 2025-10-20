@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: MCItem
   id: MCHypospray
   name: hypospray
   description: A sterile injector for rapid administration of drugs to patients.

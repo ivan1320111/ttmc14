@@ -24,7 +24,7 @@ public sealed class MCIntegritySystem : EntitySystem
             return string.Empty;
 
         return entity.Comp.Thresholds.TryGetValue(integrityId, out var value)
-            ? $"{damageableComponent.TotalDamage}/{value}"
+            ? $"{value - damageableComponent.TotalDamage}/{value}"
             : string.Empty;
     }
 

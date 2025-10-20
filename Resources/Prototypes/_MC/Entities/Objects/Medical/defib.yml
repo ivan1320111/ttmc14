@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: MCItem
   id: MCBaseDefibrillator
   name: emergency defibrillator
   description: A handheld emergency defibrillator, used to restore fibrillating patients. Can optionally bring people back from the dead.

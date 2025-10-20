@@ -2,6 +2,7 @@
   parent: RMCBaseMeleeWeapon
   id: MCWeaponGun
   abstract: true
+  categories: [ MCContent ]
   components:
   - type: UsableWhileDevoured
     canUnequip: true
@@ -41,6 +42,7 @@
 
 - type: entity
   id: MCAttachableHolder
+  categories: [ MCContent ]
   abstract: true
   components:
   - type: AttachableHolder
@@ -48,8 +50,7 @@
   - type: ActivatableUI
     verbText: rmc-verb-strip-attachables
     verbOnly: true
-    key:
-      enum.AttachmentUI.StripKey
+    key: enum.AttachmentUI.StripKey
   - type: UserInterface
     interfaces:
       enum.AttachmentUI.StripKey:

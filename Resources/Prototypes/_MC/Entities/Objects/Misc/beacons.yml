@@ -41,7 +41,7 @@
   parent: MCBeacon
   id: MCBeaconMedevac
   name: medevac beacon
-  description: A specialized teleportation beacon that links with a medvac stretcher; provides the target destination for the stretcher's displacement field. WARNING: Must be in a powered area to function.
+  description: "A specialized teleportation beacon that links with a medvac stretcher; provides the target destination for the stretcher's displacement field. WARNING: Must be in a powered area to function."
   components:
   - type: Tag
     tags:

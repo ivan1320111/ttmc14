@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
+  parent: [ MCWeaponGun, MCItem, RMCBaseAttachableHolder ]
   id: MCWeaponFlamer
   name: FL-84 flamethrower
   description: M34 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly.
