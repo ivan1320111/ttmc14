@@ -2,8 +2,8 @@
 enabled = true
 timezone = "Russian Standard Time"
 update_frequency = 60
-days = "Saturday,Sunday"
-start = "17:00"
+days = "Friday,Saturday,Sunday"
+start = "10:00"
 end = "24:00"
 
 [accessibility]
