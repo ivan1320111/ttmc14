@@ -55,15 +55,15 @@
   - type: MagazineAmmoProvider
   - type: ContainerContainer
     containers:
-      gun_magazine: !type:ContainerSlot ""
+      gun_magazine: !type:ContainerSlot
   - type: HTN
     rootTask:
       task: RMCSentryCompound
     blackboard:
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
-      VisionRadius: !type:Single "6.0"
-      AggroVisionRadius: !type:Single "6.0"
+      VisionRadius: !type:Single "7.0"
+      AggroVisionRadius: !type:Single "7.0"
   - type: MouseRotator
     angleTolerance: 5
     rotationSpeed: 180
@@ -117,6 +117,8 @@
   name: sentry
   abstract: true
   components:
+  - type: Tag
+    tags: [ MCSentry ]
   - type: MCSentry
   - type: MCArmor
     melee: 50
@@ -127,3 +129,9 @@
     bio: 100
     fire: 80
     acid: 50
+
+- type: Tag
+  id: MCSentry
+
+- type: Tag
+  id: MCMagazineSentry

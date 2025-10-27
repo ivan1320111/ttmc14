@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 10/05/2025 12:03:49
-  entityCount: 387
+  time: 10/27/2025 15:09:45
+  entityCount: 390
 maps: []
 grids:
 - 1
@@ -1627,6 +1627,23 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
+- proto: MCCaseSentryST571
+  entities:
+  - uid: 347
+    components:
+    - type: Transform
+      pos: -1.5,3.5
+      parent: 1
+  - uid: 389
+    components:
+    - type: Transform
+      pos: -1.5,3.5
+      parent: 1
+  - uid: 390
+    components:
+    - type: Transform
+      pos: -1.5,3.5
+      parent: 1
 - proto: MCChemDispenserMedbay
   entities:
   - uid: 118

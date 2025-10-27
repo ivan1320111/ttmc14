@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "case"
+    },
+    {
+      "name": "empty_case"
+    },
+    {
+      "name": "smartgun_case"
+    },
+    {
+      "name": "sniper_case"
+    },
+    {
+      "name": "rocket_case"
+    },
+    {
+      "name": "armor_case"
+    },
+    {
+      "name": "grenade_case"
+    },
+    {
+      "name": "sentry_case"
+    },
+    {
+      "name": "sentry_mini_case"
+    }
+  ]
+}

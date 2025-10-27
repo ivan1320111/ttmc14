@@ -2,15 +2,20 @@
 using Content.Shared._MC.Chat;
 using Content.Shared._MC.Damage.Integrity.Systems;
 using Content.Shared._MC.Sentries.Events;
+using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.NPC;
+using Content.Shared._RMC14.Sentry;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
+using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -48,12 +53,14 @@ public sealed class MCSentrySystem : EntitySystem
         _sentryQuery = GetEntityQuery<MCSentryComponent>();
 
         SubscribeLocalEvent<MCSentryComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<MCSentryComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
 
         SubscribeLocalEvent<MCSentryComponent, PickupAttemptEvent>(OnPickupAttempt);
         SubscribeLocalEvent<MCSentryComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<MCSentryComponent, CombatModeShouldHandInteractEvent>(OnShouldInteract);
         SubscribeLocalEvent<MCSentryComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<MCSentryComponent, MCSentryDeployDoAfterEvent>(OnDeployDoAfter);
+        SubscribeLocalEvent<MCSentryComponent, MCSentryDisassembleDoAfterEvent>(OnDisassembleDoAfter);
 
         SubscribeLocalEvent<MCSentryComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<MCSentryComponent, DestructionEventArgs>(OnDestruction);
@@ -74,72 +81,110 @@ public sealed class MCSentrySystem : EntitySystem
         _toUpdate.Clear();
     }
 
-    private void OnMapInit(Entity<MCSentryComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<MCSentryComponent> entity, ref MapInitEvent args)
     {
-        _toUpdate.Add(ent);
+        _toUpdate.Add(entity);
 
-        UpdateState(ent);
+        UpdateState(entity);
     }
 
-    private void OnPickupAttempt(Entity<MCSentryComponent> sentry, ref PickupAttemptEvent args)
+    private void OnGetVerbs(Entity<MCSentryComponent> entity, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        var user = args.User;
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("Disassemble"),
+            Act = () =>
+            {
+                Disassemble(entity, user);
+            },
+            Priority = 9999,
+        });
+
+    }
+
+    private void OnPickupAttempt(Entity<MCSentryComponent> entity, ref PickupAttemptEvent args)
     {
         if (args.Cancelled)
             return;
 
-        if (sentry.Comp.State != MCSentryState.Item)
+        if (entity.Comp.State != MCSentryState.Item)
             args.Cancel();
     }
 
-    private void OnAttemptShoot(Entity<MCSentryComponent> ent, ref AttemptShootEvent args)
+    private void OnAttemptShoot(Entity<MCSentryComponent> entity, ref AttemptShootEvent args)
     {
         // Since the turret is folded and deployed as a single entity,
         // we prohibit shooting from the hands
-        if (!args.Cancelled && args.User != ent.Owner)
+        if (!args.Cancelled && args.User != entity.Owner)
             args.Cancelled = true;
     }
 
-    private void OnShouldInteract(Entity<MCSentryComponent> ent, ref CombatModeShouldHandInteractEvent args)
+    private void OnShouldInteract(Entity<MCSentryComponent> entity, ref CombatModeShouldHandInteractEvent args)
     {
         args.Cancelled = true;
     }
 
-    private void OnUseInHand(Entity<MCSentryComponent> sentry, ref UseInHandEvent args)
+    private void OnUseInHand(Entity<MCSentryComponent> entity, ref UseInHandEvent args)
     {
         args.Handled = true;
 
-        if (!CanDeployPopup(sentry, args.User, out _, out _))
+        if (!CanDeployPopup(entity, args.User, out _, out _))
             return;
 
         var ev = new MCSentryDeployDoAfterEvent();
-        var delay = sentry.Comp.DeployTime;
-        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, sentry)
+        var delay = entity.Comp.DeployTime;
+        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, entity, entity, entity)
         {
             BreakOnMove = true,
+            BreakOnDropItem = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnDeployDoAfter(Entity<MCSentryComponent> sentry, ref MCSentryDeployDoAfterEvent args)
+    private void OnDeployDoAfter(Entity<MCSentryComponent> entity, ref MCSentryDeployDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled || args.Handled || entity.Comp.State == MCSentryState.Deployed)
             return;
 
         args.Handled = true;
 
-        if (!CanDeployPopup(sentry, args.User, out var coordinates, out var angle))
+        if (!CanDeployPopup(entity, args.User, out var coordinates, out var angle))
             return;
 
-        sentry.Comp.State = MCSentryState.Deployed;
-        Dirty(sentry);
+        entity.Comp.State = MCSentryState.Deployed;
+        Dirty(entity);
 
-        var xform = Transform(sentry);
+        var xform = Transform(entity);
 
-        _transform.SetCoordinates(sentry, xform, coordinates, angle);
-        _transform.AnchorEntity(sentry, xform);
+        _transform.SetCoordinates(entity, xform, coordinates, angle);
+        _transform.AnchorEntity(entity, xform);
         // _rmcInteraction.SetMaxRotation(sentry.Owner, angle, sentry.Comp.MaxDeviation);
 
-        UpdateState(sentry);
+        UpdateState(entity);
+    }
+
+    private void OnDisassembleDoAfter(Entity<MCSentryComponent> entity, ref MCSentryDisassembleDoAfterEvent args)
+    {
+        var user = args.User;
+        if (args.Cancelled || args.Handled || entity.Comp.State == MCSentryState.Item)
+            return;
+
+        args.Handled = true;
+        entity.Comp.State = MCSentryState.Item;
+
+        RemCompDeferred<MaxRotationComponent>(entity);
+        _transform.Unanchor(entity.Owner, Transform(entity));
+
+        UpdateState(entity);
+
+        var selfMsg = Loc.GetString("rmc-sentry-disassemble-finish-self", ("sentry", entity));
+        var othersMsg = Loc.GetString("rmc-sentry-disassemble-finish-others", ("user", user), ("sentry", entity));
+        _popup.PopupPredicted(selfMsg, othersMsg, entity, user);
     }
 
     private void OnDamageChanged(Entity<MCSentryComponent> entity, ref DamageChangedEvent args)
@@ -169,28 +214,28 @@ public sealed class MCSentrySystem : EntitySystem
         _mcRadio.SendRadioMessage(entity, message, entity.Comp.AlertChannel, entity);
     }
 
-    private void UpdateState(Entity<MCSentryComponent> sentry)
+    private void UpdateState(Entity<MCSentryComponent> entity)
     {
-        var fixture = sentry.Comp.DeployFixture is { } fixtureId && TryComp<FixturesComponent>(sentry, out var fixtures)
-            ? _fixture.GetFixtureOrNull(sentry, fixtureId, fixtures)
+        var fixture = entity.Comp.DeployFixture is { } fixtureId && TryComp<FixturesComponent>(entity, out var fixtures)
+            ? _fixture.GetFixtureOrNull(entity, fixtureId, fixtures)
             : null;
 
-        switch (sentry.Comp.State)
+        switch (entity.Comp.State)
         {
             case MCSentryState.Item:
                 if (fixture is not null)
-                    _physics.SetHard(sentry, fixture, false);
+                    _physics.SetHard(entity, fixture, false);
 
-                _rmcNpc.SleepNPC(sentry);
-                _appearance.SetData(sentry, MCSentryLayers.Layer, MCSentryState.Item);
+                _rmcNpc.SleepNPC(entity);
+                _appearance.SetData(entity, MCSentryLayers.Layer, MCSentryState.Item);
                 break;
 
             case MCSentryState.Deployed:
                 if (fixture is not null)
-                    _physics.SetHard(sentry, fixture, true);
+                    _physics.SetHard(entity, fixture, true);
 
-                _rmcNpc.WakeNPC(sentry);
-                _appearance.SetData(sentry, MCSentryLayers.Layer, MCSentryState.Deployed);
+                _rmcNpc.WakeNPC(entity);
+                _appearance.SetData(entity, MCSentryLayers.Layer, MCSentryState.Deployed);
                 break;
 
             default:
@@ -198,8 +243,23 @@ public sealed class MCSentrySystem : EntitySystem
         }
     }
 
+    private void Disassemble(Entity<MCSentryComponent> entity, EntityUid user)
+    {
+        if (entity.Comp.State == MCSentryState.Item)
+            return;
+
+        var ev = new MCSentryDisassembleDoAfterEvent();
+        var delay = entity.Comp.DeployTime;
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, entity)
+        {
+            BreakOnMove = true,
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
     private bool CanDeployPopup(
-        Entity<MCSentryComponent> sentry,
+        Entity<MCSentryComponent> entity,
         EntityUid user,
         out EntityCoordinates coordinates,
         out Angle rotation)
@@ -217,7 +277,7 @@ public sealed class MCSentrySystem : EntitySystem
         if (_rmcMap.CanBuildOn(coordinates))
             return true;
 
-        _popup.PopupClient(Loc.GetString("rmc-sentry-need-open-area", ("sentry", sentry)), user, user, PopupType.SmallCaution);
+        _popup.PopupClient(Loc.GetString("rmc-sentry-need-open-area", ("sentry", entity)), user, user, PopupType.SmallCaution);
         return false;
     }
 }

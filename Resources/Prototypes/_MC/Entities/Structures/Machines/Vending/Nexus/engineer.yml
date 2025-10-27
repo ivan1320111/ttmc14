@@ -62,7 +62,8 @@
       # M21 APRDS "Minelayer"
     - name: Other
       entries:
-      # ST-580 point defense sentry kit
+      - id: MCCaseSentryST580
+        points: 50
       - id: RMCTesla
         points: 30
       # Iguana Unmanned Vehicle
