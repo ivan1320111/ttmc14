@@ -4,12 +4,14 @@ using Content.Shared._MC.Nuke.Generator.UI;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Power;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._MC.Nuke.Generator;
 
 public sealed class MCNukeDiskGeneratorSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -59,7 +61,9 @@ public sealed class MCNukeDiskGeneratorSystem : EntitySystem
 
         if (entity.Comp.CheckpointProgress >= 1)
         {
-            Spawn(entity.Comp.SpawnId, _transform.GetMapCoordinates(entity));
+            if (_net.IsServer)
+                Spawn(entity.Comp.SpawnId, _transform.GetMapCoordinates(entity));
+
             return;
         }
 
