@@ -92,6 +92,14 @@
   - type: MCXenoBiomass
   - type: MCXenoPsydrain
   - type: ActiveInputMover
+  - type: RMCImmuneToIgnition
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass
+  - type: RMCImmuneToFireTileDamage
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass
   - type: MCXenoDamageVisuals
 
 - type: entity

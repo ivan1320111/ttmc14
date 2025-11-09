@@ -47,6 +47,7 @@
     - MCXenoHunter
     - MCXenoBull
     - MCXenoSpitter
+    - MCXenoForger
     evolvesToWithoutPoints:
     - MCXenoShrike
     - MCXenoQueen
@@ -80,8 +81,7 @@
   - type: Fixtures
     fixtures:
       fix1:
-        shape:
-          !type:PhysShapeCircle
+        shape: !type:PhysShapeCircle
           radius: 0.35
         density: 185
         mask:
@@ -90,8 +90,7 @@
         layer:
         - MobLayer
       fix2:
-        shape:
-          !type:PhysShapeCircle
+        shape: !type:PhysShapeCircle
           radius: 0.45
         density: 185
         layer:
@@ -114,5 +113,3 @@
       groups:
         Brute: 75 # 25 per type
         Burn: 100 # 25 per type
-
-

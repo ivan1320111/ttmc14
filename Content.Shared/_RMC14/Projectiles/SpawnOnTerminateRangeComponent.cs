@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Projectiles;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(RMCProjectileSystem))]
-public sealed partial class SpawnOnTerminateComponent : Component
+public sealed partial class SpawnOnTerminateRangeComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntityCoordinates? Origin;
@@ -16,13 +16,19 @@ public sealed partial class SpawnOnTerminateComponent : Component
     public EntProtoId Spawn;
 
     [DataField, AutoNetworkedField]
-    public LocId? Popup;
+    public float Range = 3f;
 
     [DataField, AutoNetworkedField]
-    public float Range = 1.5f;
+    public float PositionXOne = 1f;
 
     [DataField, AutoNetworkedField]
-    public PopupType? PopupType;
+    public float PositionXTwo = -1f;
+
+    [DataField, AutoNetworkedField]
+    public float PositionYOne = 1f;
+
+    [DataField, AutoNetworkedField]
+    public float PositionYTwo = -1f;
 
     [DataField, AutoNetworkedField]
     public bool ProjectileAdjust = true;

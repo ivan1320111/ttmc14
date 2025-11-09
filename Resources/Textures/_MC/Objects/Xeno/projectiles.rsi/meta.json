@@ -17,6 +17,14 @@
       ]
     },
     {
+      "name": "fireball",
+      "delays": [
+        [
+          0.1
+        ]
+      ]
+    },
+    {
       "name": "declone"
     },
     {
