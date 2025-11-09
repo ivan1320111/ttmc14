@@ -8,17 +8,17 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
-  id: MCXenoPyrogen
+  id: MCXenoForger
   name: Pyrogen
   description: A skittish alien, it burns with fury.
   components:
   - type: Sprite
-    sprite: _MC/Mobs/Xenos/pyrogen.rsi
+    sprite: _MC/Mobs/Xenos/forger.rsi
     offset: 0,0.35
   - type: GhostRole
-    name: mc-job-name-xeno-pyrogen
+    name: mc-job-name-xeno-forger
   - type: FixedIdentity
-    name: mc-job-name-xeno-pyrogen
+    name: mc-job-name-xeno-forger
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -30,7 +30,7 @@
     plasmaRegenOnWeeds: 18
   - type: Xeno
     tier: 2
-    role: MCXenoPyrogen
+    role: MCXenoForger
     actionIds:
     - MCActionXenoRest
     - MCActionXenoPsydrain
@@ -81,18 +81,18 @@
   - type: TacticalMapIcon
     icon:
       sprite: _MC/Interface/Xeno/icons.rsi
-      state: pyrogen
+      state: forger
   # Passive abilities
   - type: MCXenoSunder
     multiplier: 0.8
   - type: RMCImmuneToIgnition
     bypassWhitelist:
       components:
-      - None  # Only fires with this component can ignite the queen
+      - None # Only fires with this component can ignite the queen
   - type: RMCImmuneToFireTileDamage
     bypassWhitelist:
       components:
-      - None  # Only fires with this component can bypass immunity
+      - None # Only fires with this component can bypass immunity
   # Abilities
   - type: MCXenoHeadbuttCharge
   - type: MCXenoInferno
@@ -101,7 +101,7 @@
         Burn: 30
   - type: MCXenoFireball
   - type: MCXenoWhirlwind
-    fire: MCTileFireNeon
+    fire: MCTileFireXenoAcid
     range: 7
     doAfter: 0.6
     delay: 0.3

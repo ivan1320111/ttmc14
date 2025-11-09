@@ -7,12 +7,13 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _MC/Interface/Actions/Xeno/pyrogen.rsi
+      sprite: _MC/Interface/Actions/Xeno/forger.rsi
       state: inferno
     useDelay: 1.5
   - type: InstantAction
-    event: !type:MCXenoInfernoActionEvent
+    event:
 
+      !type:MCXenoInfernoActionEvent ""
 - type: entity
   parent: ActionXenoBase
   id: MCActionXenoFireball
@@ -22,14 +23,14 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _MC/Interface/Actions/Xeno/pyrogen.rsi
+      sprite: _MC/Interface/Actions/Xeno/forger.rsi
       state: fireball
     useDelay: 1.5
   - type: TargetAction
     checkCanAccess: false
     range: 8
   - type: WorldTargetAction
-    event: !type:MCXenoFireballActionEvent
+    event: !type:MCXenoFireballActionEvent ""
   - type: ActionBlockIfResting
 
 - type: entity
@@ -41,14 +42,14 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _MC/Interface/Actions/Xeno/pyrogen.rsi
+      sprite: _MC/Interface/Actions/Xeno/forger.rsi
       state: fireslash
     useDelay: 12
   - type: TargetAction
     checkCanAccess: false
     range: 8
   - type: WorldTargetAction
-    event: !type:MCXenoFirechargeActionEvent
+    event: !type:MCXenoFirechargeActionEvent ""
   - type: XenoActionPlasma
     cost: 30
 
@@ -61,11 +62,11 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _MC/Interface/Actions/Xeno/pyrogen.rsi
+      sprite: _MC/Interface/Actions/Xeno/forger.rsi
       state: whirlwind
     useDelay: 12
   - type: TargetAction
     range: 15
   - type: WorldTargetAction
-    event: !type:MCXenoWhirlwindActionEvent
+    event: !type:MCXenoWhirlwindActionEvent ""
   - type: ActionBlockIfResting

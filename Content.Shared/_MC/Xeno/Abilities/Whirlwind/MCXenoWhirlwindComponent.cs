@@ -11,7 +11,7 @@ namespace Content.Shared._MC.Xeno.Abilities.Whirlwind;
 public sealed partial class MCXenoWhirlwindComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntProtoId Fire = "MCTileFireNeon";
+    public EntProtoId Fire = "MCTileFireXenoAcid";
 
     [DataField, AutoNetworkedField]
     public TimeSpan DoAfter;

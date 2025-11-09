@@ -82,12 +82,12 @@
 # Pyrogen
 - type: job
   parent: MCJobXeno
-  id: MCXenoPyrogen
+  id: MCXenoForger
   name: mc-job-name-xeno-bull # ИЗМЕНИ!!
-  playTimeTracker: MCXenoPyrogen
+  playTimeTracker: MCXenoForger
 
 - type: playTimeTracker
-  id: MCXenoPyrogen
+  id: MCXenoForger
   isXeno: true
 
 # Carrier

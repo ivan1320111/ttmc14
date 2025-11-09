@@ -84,14 +84,13 @@
     paralyze: 0
 
 - type: entity
-  parent: [ XenoBaseProjectile ]
+  parent: MCXenoProjectile
   id: MCXenoProjectileFireball
   name: fireball
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
-    - state: xeno_fireball
+    - state: fireball
       shader: unshaded
   - type: Projectile
     impactEffect: null
@@ -106,7 +105,7 @@
     positionYOne: -1
     positionYTwo: 1
     range: 3
-    spawn: MCTileFireNeon
+    spawn: MCTileFireXenoAcid
   - type: SpawnOnTerminate
     spawn: MCEffectInfernoPyrogen
   - type: ProjectileMaxRange
@@ -115,14 +114,15 @@
     accuracy: 95
 
 - type: entity
-  parent: [ XenoBaseProjectile ]
+  parent: MCXenoProjectile
   id: MCXenoProjectileWhirlwind
   name: Plasma Whirlwind
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
+    sprite: _MC/Objects/Xeno/whirlwind.rsi
+    noRot: true
     layers:
-    - state: whirlwind
+    - state: icon
       shader: unshaded
   - type: Projectile
     impactEffect: null

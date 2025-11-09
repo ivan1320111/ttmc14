@@ -34,7 +34,7 @@ public sealed partial class MCXenoInfernoComponent : Component
     public EntProtoId Effect = "MCEffectInfernoPyrogen";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Spawn = "MCTileFireNeon";
+    public EntProtoId Spawn = "MCTileFireXenoAcid";
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_MC/Effects/Pyrogen/fireball.ogg");
