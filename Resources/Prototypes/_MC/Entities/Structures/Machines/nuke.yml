@@ -40,6 +40,13 @@
       disk_red: !type:ContainerSlot
       disk_blue: !type:ContainerSlot
       disk_green: !type:ContainerSlot
+  - type: MarineMapTracked
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _MC/Interface/MapIcons/power.rsi
+      state: nuke_off
 
 - type: entity
   parent: MCNuclearBomb
