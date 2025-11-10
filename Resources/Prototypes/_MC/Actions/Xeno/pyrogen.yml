@@ -11,9 +11,9 @@
       state: inferno
     useDelay: 1.5
   - type: InstantAction
-    event:
+    event: !type:MCXenoInfernoActionEvent
+  - type: ActionBlockIfResting
 
-      !type:MCXenoInfernoActionEvent ""
 - type: entity
   parent: ActionXenoBase
   id: MCActionXenoFireball
@@ -30,7 +30,7 @@
     checkCanAccess: false
     range: 8
   - type: WorldTargetAction
-    event: !type:MCXenoFireballActionEvent ""
+    event: !type:MCXenoFireballActionEvent
   - type: ActionBlockIfResting
 
 - type: entity
@@ -49,9 +49,10 @@
     checkCanAccess: false
     range: 8
   - type: WorldTargetAction
-    event: !type:MCXenoFirechargeActionEvent ""
+    event: !type:MCXenoFirechargeActionEvent
   - type: XenoActionPlasma
     cost: 30
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
@@ -68,5 +69,5 @@
   - type: TargetAction
     range: 15
   - type: WorldTargetAction
-    event: !type:MCXenoWhirlwindActionEvent ""
+    event: !type:MCXenoWhirlwindActionEvent
   - type: ActionBlockIfResting

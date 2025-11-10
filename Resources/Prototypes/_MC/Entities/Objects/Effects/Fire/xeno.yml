@@ -14,14 +14,12 @@
   - type: RMCIgniteOnCollide
     maxStacks: 10
     tileDamage:
-      types:
-        Heat: 1
+      groups:
+        Burn: 1
   - type: DamageOnCollide
-    damageDead: false
-    fire: true
     damage:
-      types:
-        Heat: 2
+      groups:
+        Burn: 2
   - type: TileFire
     id: MCTileFireXenoAcid
     duration: 7
@@ -39,3 +37,4 @@
   - type: RMCScorchEffectOnSpawn
     decalTag: burnt
     tileLimit: 3
+  - type: MCXenoIgnoreFriendlyCollision

@@ -9,7 +9,7 @@
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
   id: MCXenoForger
-  name: Pyrogen
+  name: forger
   description: A skittish alien, it burns with fury.
   components:
   - type: Sprite
@@ -83,16 +83,8 @@
       sprite: _MC/Interface/Xeno/icons.rsi
       state: forger
   # Passive abilities
-  - type: MCXenoSunder
-    multiplier: 0.8
   - type: RMCImmuneToIgnition
-    bypassWhitelist:
-      components:
-      - None # Only fires with this component can ignite the queen
   - type: RMCImmuneToFireTileDamage
-    bypassWhitelist:
-      components:
-      - None # Only fires with this component can bypass immunity
   # Abilities
   - type: MCXenoHeadbuttCharge
   - type: MCXenoInferno
@@ -106,6 +98,8 @@
     doAfter: 0.6
     delay: 0.3
     barricadeDamage:
-      types:
-        Heat: 5
+      groups:
+        Burn: 5
   - type: MCXenoFirecharge
+  - type: PointLight
+    color: "#069420"
