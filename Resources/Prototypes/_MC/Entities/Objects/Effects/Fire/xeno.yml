@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: MCFire
+  parent: MCFirePreMade
   id: MCTileFireXenoAcid
   name: melting fire
   description: It feels cold to the touch, yet it burns.
@@ -31,6 +31,7 @@
             state: acid_2
           Three:
             state: acid_3
+  - type: XenoFriendly
   - type: MCXenoIgnoreFriendlyCollision
   - type: PointLight
     color: "#069420"
