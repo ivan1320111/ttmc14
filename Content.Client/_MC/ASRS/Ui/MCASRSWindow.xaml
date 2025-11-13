@@ -1,0 +1,10 @@
+﻿<ui:MCASRSWindow
+    xmlns="https://spacestation14.io"
+    xmlns:ui="clr-namespace:Content.Client._MC.ASRS.Ui"
+    Title="ASRS console"
+    MinSize="900 700">
+    <BoxContainer Orientation="Horizontal">
+        <ui:MCASRSCategoryView Name="CategoryView" HorizontalAlignment="Left" VerticalExpand="True" MaxWidth="350" Access="Public" />
+        <ui:MCASRSOrdersView Name="OrdersView" HorizontalExpand="True" VerticalExpand="True" Access="Public" />
+    </BoxContainer>
+</ui:MCASRSWindow>

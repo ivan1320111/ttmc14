@@ -26,7 +26,7 @@
 - type: entity
   parent: MCCaseSentry
   id: MCCaseSentryST571
-  name: ST-571 sentry crate
+  name: ST-571 sentry case
   description: A large case containing all you need to set up an automated sentry.
   components:
   - type: StorageFill
@@ -37,7 +37,7 @@
 - type: entity
   parent: MCCaseSentry
   id: MCCaseSentryST580
-  name: ST-580 point defense sentry crate
+  name: ST-580 point defense sentry case
   description: A large case containing all you need to set up an ST-580 point defense sentry.
   components:
   - type: Sprite

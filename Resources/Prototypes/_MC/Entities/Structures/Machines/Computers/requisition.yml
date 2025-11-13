@@ -1,0 +1,41 @@
+- type: entity
+  parent: MCComputerIndestructible
+  id: MCASRSConsole
+  name: ASRS console
+  description: A console for an Automated Storage and Retrieval System
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _MC/Structures/Machines/computer.rsi
+    layers:
+    - state: computer
+    - state: supply
+  - type: ActivatableUI
+    key: enum.MCASRSConsoleUi.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "MCAccessCargo" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.MCASRSConsoleUi.Key:
+        type: MCASRSBui
+  - type: MCASRSConsole
+    categories:
+    - name: Operations
+    - name: Weapons
+      entries:
+      - name: ST-571 sentry chest (x2)
+        description: A supply crate containing two boxed ST-571 sentries.
+        cost: 200
+        entities:
+        - MCCaseSentryST571
+        - MCCaseSentryST571
+    - name: Explosives
+    - name: Armor
+    - name: Clothing
+    - name: Medical
+    - name: Engineering
+    - name: Supplies
+    - name: Imports
+    - name: Vehicles
+    - name: Factory
