@@ -29,8 +29,8 @@
     fire: 50
     acid: 55
   - type: ClothingSpeedModifier
-    walkModifier: 0.857
-    sprintModifier: 0.857
+    walkModifier: 0.75
+    sprintModifier: 0.75
 
 - type: entity
   parent: MCArmorModularJaegerInfantry
@@ -77,8 +77,8 @@
     fire: 45
     acid: 45
   - type: ClothingSpeedModifier
-    walkModifier: 0.938
-    sprintModifier: 0.938
+    walkModifier: 0.9
+    sprintModifier: 0.9
 
 - type: entity
   parent: MCArmorModularJaegerScout
@@ -116,8 +116,8 @@
     fire: 55
     acid: 60
   - type: ClothingSpeedModifier
-    walkModifier: 0.811
-    sprintModifier: 0.811
+    walkModifier: 0.65
+    sprintModifier: 0.65
 
 - type: entity
   parent: MCArmorModularJaegerGugnir

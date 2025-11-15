@@ -16,8 +16,8 @@
     fire: 25
     acid: 30
   - type: ClothingSpeedModifier
-    walkModifier: 0.938
-    sprintModifier: 0.938
+    walkModifier: 0.9
+    sprintModifier: 0.9
 
 - type: entity
   parent: RMCBaseMarineArmorLight
@@ -37,8 +37,8 @@
     fire: 25
     acid: 35
   - type: ClothingSpeedModifier
-    walkModifier: 0.938
-    sprintModifier: 0.938
+    walkModifier: 0.9
+    sprintModifier: 0.9
 
 - type: entity
   parent: RMCBaseMarineArmorLight
@@ -58,8 +58,8 @@
     fire: 25
     acid: 35
   - type: ClothingSpeedModifier
-    walkModifier: 0.938
-    sprintModifier: 0.938
+    walkModifier: 0.9
+    sprintModifier: 0.9
 
 - type: entity
   parent: RMCBaseMarineArmorLight
@@ -79,5 +79,5 @@
     fire: 25
     acid: 35
   - type: ClothingSpeedModifier
-    walkModifier: 0.938
-    sprintModifier: 0.938
+    walkModifier: 0.9
+    sprintModifier: 0.9
