@@ -38,3 +38,23 @@
   - type: XenoActionPlasma
     cost: 300
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: MCActionXenoPsychicCure
+  name: Psychic Cure (200)
+  description: Heal and remove debuffs from a target.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _MC/Interface/Actions/Xeno/drone.rsi
+      state: heal_xeno
+    useDelay: 60
+  - type: TargetAction
+    range: 3
+  - type: EntityTargetAction
+    event: !type:MCXenoPsychicCureActionEvent
+    canTargetSelf: false
+  - type: XenoActionPlasma
+    cost: 200

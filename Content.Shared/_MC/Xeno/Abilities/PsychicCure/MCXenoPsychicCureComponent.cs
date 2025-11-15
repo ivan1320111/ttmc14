@@ -2,20 +2,20 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._MC.Xeno.Abilities.AcidicSalve;
+namespace Content.Shared._MC.Xeno.Abilities.PsychicCure;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class MCXenoAcidicSalveComponent : Component
+public sealed partial class MCXenoPsychicCureComponent : Component
 {
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public float Range = 1.5f;
+    public float Range = 3f;
 
     [DataField, AutoNetworkedField]
     public EntProtoId EffectProtoId = "RMCEffectHealHealer";
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? Sound;
+    public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_MC/Effects/magic.ogg");
 }

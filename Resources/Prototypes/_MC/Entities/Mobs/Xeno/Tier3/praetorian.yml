@@ -37,6 +37,7 @@
     - MCActionXenoDevolve
     - MCActionXenoAcidStrong
     # Main
+    - MCActionXenoDash
     - MCActionXenoScatterSpitPraetorian
     - MCActionXenoSprayAcidPraetorian
     - MCActionXenoToggleXenoSpitPassthroughPraetorian
@@ -88,3 +89,10 @@
   - type: AcidTrap
     trapLevel: 3
     spray: XenoAcidSprayTrapStrong
+  # Pounce (Dash)
+  - type: MCXenoPounce
+    maxDistance: 6
+    strength: 45
+    hitSelfParalyzeTime: 0
+    hitKnockdownTime: 0.1
+    stopOnHit: false

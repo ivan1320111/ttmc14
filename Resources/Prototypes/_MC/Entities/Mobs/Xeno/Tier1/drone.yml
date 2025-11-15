@@ -4,7 +4,6 @@
   - MCXenoBase
   - MCXenoPlantingWeeds
   - MCXenoCreateResinJelly
-  - MCXenoAcidicSalve
   - MCActionXenoRecycle
   # RMC
   - CMXenoDeveloped
@@ -148,3 +147,11 @@
     trapLevel: 1
     cost: 70
     spray: XenoAcidSprayTrapWeak
+  # Abilities
+  - type: MCXenoAcidicSalve
+    # healHp: 50 + maxHp * 0.1 + aura * maxHp * 0.01
+    # sunder: healHp * 0.1
+    range: 1.5
+    healValue: 50
+    healMaxHealthMultiplier: 0.1
+    sunderByHealMultiplier: 1

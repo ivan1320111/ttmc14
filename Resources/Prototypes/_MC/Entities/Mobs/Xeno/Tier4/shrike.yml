@@ -25,6 +25,9 @@
       0: Alive
       400: Critical
       500: Dead
+  - type: XenoAnnounceDeath
+    message: mc-xeno-hive-ruler-dead
+    color: "#921992"
   - type: XenoPlasma
     plasma: 925
     maxPlasma: 925
@@ -46,7 +49,7 @@
     - MCActionXenoSelectWeeds
     - MCActionXenoPlantWeeds
     # Main
-    - MCActionXenoAcidicSalve
+    - MCActionXenoPsychicCure
     - MCActionXenoPsychicFling
     - MCActionXenoUnrelentingForce
     - MCActionXenoPheromones
@@ -88,7 +91,6 @@
       state: shrike
   - type: XenoInhands
     prefix: shrike
-  - type: MCXenoAcidicSalve
   # - type: MCXenoLayEgg
   - type: MCXenoPsychicFling
   - type: MCXenoUnrelentingForce
@@ -123,3 +125,5 @@
     - MCDoorXenoResinThick
   - type: XenoAcid
   - type: MCXenoCreateResinJelly
+  # Abilities
+  - type: MCXenoPsychicCure

@@ -33,7 +33,12 @@ public sealed class MCRoundScheduleSystem : EntitySystem
     {
         base.Initialize();
 
+#if FULL_RELEASE
         _configuration.OnValueChanged(MCConfigVars.MCRoundSchedule, value => _enabled = value, true);
+#else
+        _enabled = false;
+#endif
+
         _configuration.OnValueChanged(MCConfigVars.MCRoundScheduleTimezone, value => _timezoneInfo = ParseTimeZoneInfo(value), true);
         _configuration.OnValueChanged(MCConfigVars.MCRoundScheduleUpdateFrequency, value => _updateFrequency = TimeSpan.FromSeconds(value), true);
         _configuration.OnValueChanged(MCConfigVars.MCRoundScheduleDays, v => _days = ParseDays(v), true);

@@ -1,5 +1,26 @@
 - type: entity
   parent: ActionXenoBase
+  id: MCActionXenoDash
+  name: Dash (100)
+  description: Instantly dash to the selected tile.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _MC/Interface/Actions/Xeno/runner.rsi
+      state: pounce
+    useDelay: 10
+  - type: TargetAction
+    range: 100
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:MCXenoPounceActionEvent
+  - type: XenoActionPlasma
+    cost: 100
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
   id: MCActionXenoToggleXenoSpitPassthroughPraetorian
   name: acid splash
   components:

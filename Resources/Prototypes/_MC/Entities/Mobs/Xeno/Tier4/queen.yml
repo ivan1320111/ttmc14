@@ -27,6 +27,9 @@
       0: Alive
       600: Critical
       700: Dead
+  - type: XenoAnnounceDeath
+    message: mc-xeno-hive-ruler-dead
+    color: "#921992"
   - type: XenoPlasma
     plasma: 1200
     maxPlasma: 1200

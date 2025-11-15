@@ -1,5 +1,4 @@
-﻿using Content.Shared._MC.Xeno.Hive.Components;
-using Content.Shared._RMC14.Xenonids;
+﻿using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.GameStates;
@@ -7,9 +6,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._MC.Xeno.Hive.Systems;
 
-public abstract class MCSharedXenoHiveSystem : MCEntitySystemSingleton<MCXenoHiveSingletonComponent>
+public abstract partial class MCSharedXenoHiveSystem : MCEntitySystemSingleton<MCXenoHiveSingletonComponent>
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MobStateSystem _mobState = null!;
 
     [ViewVariables]
     public EntityUid? DefaultHive => Inst.Comp.DefaultHive;
@@ -23,14 +22,17 @@ public abstract class MCSharedXenoHiveSystem : MCEntitySystemSingleton<MCXenoHiv
 
         _hiveQuery = GetEntityQuery<HiveComponent>();
         _hiveMemberQuery = GetEntityQuery<HiveMemberComponent>();
+
+        InitializeRuler();
     }
+
 
     public void SetCanEvolveWithoutLeader(Entity<HiveComponent?> entity, bool value)
     {
         if (!Resolve(entity, ref entity.Comp))
             return;
 
-        entity.Comp.CanEvolveWithoutLeader = value;
+        entity.Comp.CanEvolveWithoutRuler = value;
         Dirty(entity);
     }
 
@@ -41,23 +43,6 @@ public abstract class MCSharedXenoHiveSystem : MCEntitySystemSingleton<MCXenoHiv
 
         entity.Comp.CanCollapse = value;
         Dirty(entity);
-    }
-
-    public bool HasLeader(EntityUid hive)
-    {
-        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MCXenoHiveLeaderComponent>();
-        while (query.MoveNext(out var uid, out _, out var hiveMemberComponent, out _))
-        {
-            if (_mobState.IsDead(uid))
-                continue;
-
-            if (hiveMemberComponent.Hive != uid)
-                continue;
-
-            return true;
-        }
-
-        return false;
     }
 
     public Dictionary<int, int> GetTiers(EntityUid hive)

@@ -3,6 +3,10 @@
   abstract: true
   categories: [ MCContent ]
   components:
+  - type: MCXenoHeal
+  - type: XenoAnnounceDeath
+    message: mc-xeno-death
+    color: "#459A62"
   - type: ShowHealthBars
     damageContainers:
     - Biological
@@ -139,12 +143,6 @@
   abstract: true
   components:
   - type: MCXenoCreateResinJelly
-
-- type: entity
-  id: MCXenoAcidicSalve
-  abstract: true
-  components:
-  - type: MCXenoAcidicSalve
 
 - type: entity
   id: MCXenoPickupOne

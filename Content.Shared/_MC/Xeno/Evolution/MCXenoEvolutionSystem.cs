@@ -98,13 +98,13 @@ public sealed class MCXenoEvolutionSystem : EntitySystem
             return false;
         }
 
-        var hiveHasLeader = _mcXenoHive.HasLeader(hive);
+        var hiveHasLeader = _mcXenoHive.HiveHasRuler((hive, hive));
         var targetLeader = targetPrototype.HasComponent<MCXenoHiveLeaderComponent>();
         var canEvolveWithoutLeader =
             targetPrototype.TryGetComponent<XenoEvolutionComponent>(out var evolutionComponent, _compFactory) &&
             evolutionComponent.CanEvolveWithoutGranter;
 
-        if (!hive.Comp.CanEvolveWithoutLeader && !hiveHasLeader && !targetLeader && !canEvolveWithoutLeader)
+        if (!hive.Comp.CanEvolveWithoutRuler && !hiveHasLeader && !targetLeader && !canEvolveWithoutLeader)
         {
             Popup(Loc.GetString("mc-xeno-evolution-no-hive-leader"));
             return false;

@@ -1,4 +1,5 @@
-﻿using Content.Shared._MC.Xeno.Heal;
+﻿using Content.Shared._MC.Xeno.Abilities.AcidicSalve;
+using Content.Shared._MC.Xeno.Heal;
 using Content.Shared._MC.Xeno.Sunder;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Xenonids;
@@ -11,9 +12,9 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
-namespace Content.Shared._MC.Xeno.Abilities.AcidicSalve;
+namespace Content.Shared._MC.Xeno.Abilities.PsychicCure;
 
-public sealed class MCXenoAcidicSlaveSystem : MCXenoAbilitySystem
+public sealed class MCXenoPsychicCureSystem : MCXenoAbilitySystem
 {
     [Dependency] private readonly INetManager _net = null!;
 
@@ -32,11 +33,11 @@ public sealed class MCXenoAcidicSlaveSystem : MCXenoAbilitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MCXenoAcidicSalveComponent, MCXenoAcidicSlaveActionEvent>(OnAction);
-        SubscribeLocalEvent<MCXenoAcidicSalveComponent, MCXenoAcidicSlaveDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<MCXenoPsychicCureComponent, MCXenoPsychicCureActionEvent>(OnAction);
+        SubscribeLocalEvent<MCXenoPsychicCureComponent, MCXenoPsychicCureDoAfterEvent>(OnDoAfter);
     }
 
-    private void OnAction(Entity<MCXenoAcidicSalveComponent> entity, ref MCXenoAcidicSlaveActionEvent args)
+    private void OnAction(Entity<MCXenoPsychicCureComponent> entity, ref MCXenoPsychicCureActionEvent args)
     {
         if (args.Handled)
             return;
@@ -58,7 +59,7 @@ public sealed class MCXenoAcidicSlaveSystem : MCXenoAbilitySystem
 
         args.Handled = true;
 
-        var ev = new MCXenoAcidicSlaveDoAfterEvent();
+        var ev = new MCXenoPsychicCureDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, entity, entity.Comp.Delay, ev, entity, args.Target)
         {
             RequireCanInteract = false,
@@ -68,7 +69,7 @@ public sealed class MCXenoAcidicSlaveSystem : MCXenoAbilitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnDoAfter(Entity<MCXenoAcidicSalveComponent> entity, ref MCXenoAcidicSlaveDoAfterEvent args)
+    private void OnDoAfter(Entity<MCXenoPsychicCureComponent> entity, ref MCXenoPsychicCureDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
@@ -78,9 +79,8 @@ public sealed class MCXenoAcidicSlaveSystem : MCXenoAbilitySystem
 
         args.Handled = true;
 
-        var value = 50 + _mcXenoHeal.GetRecoveryAura(target) * _mcXenoHeal.GetMaxHealth(target) * 0.01f;
-        _mcXenoHeal.Heal(target, value);
-        _mcXenoSunder.AddSunder(target, value * 0.1f);
+        _mcXenoHeal.HealWounds(target, 10);
+        _mcXenoSunder.AddSunder(target, 10);
 
         if (entity.Comp.Sound is not null)
             _audio.PlayPredicted(entity.Comp.Sound, entity, entity);
