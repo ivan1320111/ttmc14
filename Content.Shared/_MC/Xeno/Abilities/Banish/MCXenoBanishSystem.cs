@@ -1,8 +1,6 @@
 ﻿using Content.Shared._MC.Xeno.Abilities.Recall;
 using Content.Shared._RMC14.Actions;
-using Content.Shared.Bed.Sleep;
 using Content.Shared.Examine;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -10,17 +8,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._MC.Xeno.Abilities.Banish;
 
-public sealed class MCXenoBanishSystem : EntitySystem
+public sealed partial class MCXenoBanishSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SleepingSystem _sleeping = default!;
-    [Dependency] private readonly SharedStatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly IGameTiming _timing = null!;
+    [Dependency] private readonly MetaDataSystem _metaData = null!;
+    [Dependency] private readonly SharedMapSystem _map = null!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = null!;
+    [Dependency] private readonly ExamineSystemShared _examine = null!;
+    [Dependency] private readonly SharedTransformSystem _transform = null!;
+    [Dependency] private readonly TagSystem _tag = null!;
 
     public override void Initialize()
     {
@@ -29,7 +25,7 @@ public sealed class MCXenoBanishSystem : EntitySystem
         SubscribeLocalEvent<MCXenoBanishComponent, MCXenoBanishActionEvent>(OnAction);
         SubscribeLocalEvent<MCXenoBanishComponent, MCXenoRecallActionEvent>(OnRecallAction);
 
-        SubscribeLocalEvent<MCXenoBanishedComponent, ComponentShutdown>(OnShutdown);
+        InitializeBanished();
     }
 
     public override void Update(float frameTime)
@@ -81,8 +77,6 @@ public sealed class MCXenoBanishSystem : EntitySystem
         banished.EndTime = _timing.CurTime + entity.Comp.Duration;
         Dirty(args.Target, banished);
 
-        _statusEffects.TryAddStatusEffectDuration(args.Target, "StatusEffectForcedSleeping", TimeSpan.FromHours(1));
-
         _transform.SetMapCoordinates(args.Target, new MapCoordinates(_transform.GetWorldPosition(args.Target), GetMap()));
     }
 
@@ -100,19 +94,6 @@ public sealed class MCXenoBanishSystem : EntitySystem
             return;
 
         RemComp<MCXenoBanishedComponent>(target);
-    }
-
-    private void OnShutdown(Entity<MCXenoBanishedComponent> entity, ref ComponentShutdown args)
-    {
-        if (Exists(entity.Comp.User) && TryComp<MCXenoBanishComponent>(entity.Comp.User, out var userBanishComponent))
-        {
-            userBanishComponent.Target = null;
-            Dirty(entity.Comp.User, userBanishComponent);
-        }
-
-        _transform.SetMapCoordinates(entity, entity.Comp.Position);
-        _statusEffects.TryRemoveStatusEffect(entity, "StatusEffectForcedSleeping");
-        _sleeping.TryWaking(entity.Owner, true);
     }
 
     private MapId GetMap()

@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Mobs;
 using Robust.Shared.Configuration;
@@ -25,11 +26,14 @@ public sealed class MCFireSystem : EntitySystem
         if (!_enabled)
             return;
 
-        if (HasComp<RMCImmuneToIgnitionComponent>(entity) || HasComp<RMCImmuneToFireTileDamageComponent>(entity))
+        if (HasComp<XenoComponent>(entity))
             return;
 
         if (args.NewMobState == MobState.Dead)
         {
+            entity.Comp.FireStacks = 0;
+            Dirty(entity);
+
             EnsureComp<RMCImmuneToIgnitionComponent>(entity);
             EnsureComp<RMCImmuneToFireTileDamageComponent>(entity);
             return;
