@@ -70,6 +70,11 @@ public sealed class MCXenoHealSystem : MCEntitySystemSingleton<MCXenoHealSinglet
 
             xenoHealComponent.RegenerationTimeNext = _timing.CurTime + TimeSpan.FromSeconds(UpdateFrequency);
 
+
+            var affectable = _rmcAffectableQuery.CompOrNull(uid);
+            if (!affectable?.OnXenoWeeds ?? false)
+                continue;
+
             var resting = HasComp<XenoRestingComponent>(uid);
             var multiplier = resting ? xenoHealComponent.RestingMultiplier : xenoHealComponent.StandMultiplier;
 
