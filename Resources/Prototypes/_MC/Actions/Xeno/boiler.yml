@@ -14,8 +14,6 @@
     range: 15
   - type: TargetAction
     range: 15
-  - type: WorldTargetAction
-    event: !type:XenoSprayAcidActionEvent
   - type: XenoActionPlasma
     cost: 250
   - type: ActionBlockIfResting
