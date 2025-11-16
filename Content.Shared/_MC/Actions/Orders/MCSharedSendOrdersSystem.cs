@@ -1,6 +1,5 @@
 ﻿using Content.Shared.Radio;
 using Content.Shared.Inventory;
-using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Radio.Components;
 using Robust.Shared.Prototypes;
@@ -9,8 +8,7 @@ namespace Content.Shared._MC.Actions.Orders;
 
 public abstract class MCSharedSendOrdersSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly InventorySystem _inventory = null!;
 
     public override void Initialize()
     {
@@ -69,13 +67,11 @@ public abstract class MCSharedSendOrdersSystem : EntitySystem
 
         Spawn(effectOnAction, Transform(entity).Coordinates);
 
-        if (!TryGetHeadset(entity, out var headsetChannel))
-        {
-            return;
-        }
-
-        _marineAnnounce.AnnounceRadio(entity, selectedMessage, headsetChannel);
+        var headsetChannel = GetHeadset(entity);
+        var message = Loc.GetString(selectedMessage);
+        SendMessage(entity, message, headsetChannel);
     }
+
     private ProtoId<RadioChannelPrototype>? TryGetSquadRadioChannel(EntityUid entity)
     {
         if (!TryComp<SquadMemberComponent>(entity, out var squad))
@@ -87,15 +83,14 @@ public abstract class MCSharedSendOrdersSystem : EntitySystem
         return team.Radio;
     }
 
-    private bool TryGetHeadset(EntityUid entity, out ProtoId<RadioChannelPrototype> channel)
+    private ProtoId<RadioChannelPrototype>? GetHeadset(EntityUid entity)
     {
-        channel = default;
-
         var hasHeadset = false;
         var slots = _inventory.GetSlotEnumerator(entity);
+
         while (slots.MoveNext(out var slot))
         {
-            if (slot.ContainedEntity is not { } contained)
+            if (slot.ContainedEntity is null)
                 continue;
 
             if (slot.ID != "ears")
@@ -106,25 +101,16 @@ public abstract class MCSharedSendOrdersSystem : EntitySystem
         }
 
         if (!hasHeadset)
-            return false;
+            return null;
 
         var squadChannel = TryGetSquadRadioChannel(entity);
-        if (squadChannel.HasValue)
-        {
-            if (HasChannelInHeadset(entity, squadChannel.Value))
-            {
-                channel = squadChannel.Value;
-                return true;
-            }
-        }
+        if (squadChannel.HasValue && HasChannelInHeadset(entity, squadChannel.Value))
+            return squadChannel.Value;
 
         if (TryComp<MCSendOrdersComponent>(entity, out var ordersComp))
-        {
-            channel = ordersComp.DefaultFallbackChannel;
-            return true;
-        }
+            return ordersComp.DefaultFallbackChannel;
 
-        return false;
+        return null;
     }
 
     private bool HasChannelInHeadset(EntityUid entity, ProtoId<RadioChannelPrototype> channel)
@@ -148,5 +134,9 @@ public abstract class MCSharedSendOrdersSystem : EntitySystem
         }
 
         return false;
+    }
+
+    protected virtual void SendMessage(EntityUid uid, string message, ProtoId<RadioChannelPrototype>? channel)
+    {
     }
 }

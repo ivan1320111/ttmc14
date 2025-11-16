@@ -1,27 +1,34 @@
-﻿using Content.Server.Actions;
+﻿using Content.Server._RMC14.Marines;
+using Content.Server.Actions;
 using Content.Server.Chat.Systems;
-using Content.Shared.Inventory;
-using Content.Shared.Whitelist;
-using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._MC.Actions.Orders;
-using Robust.Shared.Random;
+using Content.Shared.Radio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._MC.MarineOrders;
 
 public sealed class MCMarineOrdersSystem : MCSharedSendOrdersSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = null!;
+    [Dependency] private readonly ActionsSystem _actions = null!;
+    [Dependency] private readonly ChatSystem _chat = null!;
 
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<MCSendOrdersComponent, MapInitEvent>(OnOrdersMapInit);
         SubscribeLocalEvent<MCSendOrdersComponent, ComponentShutdown>(OnOrdersShutdown);
+    }
+
+    protected override void SendMessage(EntityUid uid, string message, ProtoId<RadioChannelPrototype>? channel)
+    {
+        base.SendMessage(uid, message, channel);
+
+        _chat.TrySendInGameICMessage(uid, message, InGameICChatType.Speak, false);
+
+        if (channel.HasValue)
+            _marineAnnounce.AnnounceRadio(uid, message, channel.Value);
     }
 
     private void OnOrdersMapInit(Entity<MCSendOrdersComponent> entity, ref MapInitEvent ev)
