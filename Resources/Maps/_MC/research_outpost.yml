@@ -42980,7 +42980,7 @@ entities:
     - type: Transform
       pos: 98.5,-15.5
       parent: 1
-- proto: MCWeaponDMR37
+- proto: MCWeaponSniperDMR37
   entities:
   - uid: 584
     components:

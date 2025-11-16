@@ -64,6 +64,5 @@
   categories: [ MCContent ]
   placement:
     mode: SnapgridCenter
-  abstract: true
   components:
   - type: BlockWeeds
