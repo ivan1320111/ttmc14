@@ -1,4 +1,5 @@
 - type: entity
+  parent: BaseBullet
   id: MCBullet
   categories: [ HideSpawnMenu ]
   abstract: true

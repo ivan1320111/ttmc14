@@ -1,5 +1,4 @@
 ﻿using Content.Shared.Buckle.Components;
-using Content.Shared.DragDrop;
 using Content.Shared.Emoting;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
@@ -7,7 +6,6 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Pointing;
 using Content.Shared.Speech;
-using Content.Shared.Standing;
 
 namespace Content.Shared._MC.Xeno.Abilities.Banish;
 
@@ -40,7 +38,7 @@ public sealed partial class MCXenoBanishSystem
             Dirty(entity.Comp.User, userBanishComponent);
         }
 
-        _transform.SetMapCoordinates(entity, entity.Comp.Position);
+        _mcTransform.SetMapCoordinates(entity, entity.Comp.Position, unanchor: false);
     }
 
     private static void Cancel<T>(Entity<MCXenoBanishedComponent> _, ref T args) where T : CancellableEntityEventArgs

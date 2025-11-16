@@ -1,4 +1,5 @@
-﻿using Content.Shared._MC.Xeno.Abilities.Recall;
+﻿using Content.Shared._MC.Transform;
+using Content.Shared._MC.Xeno.Abilities.Recall;
 using Content.Shared._RMC14.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Tag;
@@ -17,6 +18,8 @@ public sealed partial class MCXenoBanishSystem : EntitySystem
     [Dependency] private readonly ExamineSystemShared _examine = null!;
     [Dependency] private readonly SharedTransformSystem _transform = null!;
     [Dependency] private readonly TagSystem _tag = null!;
+
+    [Dependency] private readonly MCSharedTransformSystem _mcTransform = null!;
 
     public override void Initialize()
     {
@@ -77,7 +80,7 @@ public sealed partial class MCXenoBanishSystem : EntitySystem
         banished.EndTime = _timing.CurTime + entity.Comp.Duration;
         Dirty(args.Target, banished);
 
-        _transform.SetMapCoordinates(args.Target, new MapCoordinates(_transform.GetWorldPosition(args.Target), GetMap()));
+        _mcTransform.SetMapCoordinates(args.Target, new MapCoordinates(_transform.GetWorldPosition(args.Target), GetMap()), unanchor: false);
     }
 
     private void OnRecallAction(Entity<MCXenoBanishComponent> entity, ref MCXenoRecallActionEvent args)
