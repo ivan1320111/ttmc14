@@ -153,7 +153,7 @@
 
 # Magazine
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineSmartGunSG29
   name: SG-29 drum magazine
   description: A wide drum magazine carefully filled to capacity with 10x26mm specialized smart rounds.

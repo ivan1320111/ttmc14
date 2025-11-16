@@ -90,7 +90,7 @@
       rmc-aslot-underbarrel: 0.0, -0.31
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineRifleAR21
   name: AR-21 skirmish rifle magazine
   description: A magazine filled with 10x25mm rifle rounds for the AR-21.

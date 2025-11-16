@@ -96,7 +96,7 @@
     multiplier: 1
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineMP19
   name: "MP-19 machinepistol magazine (10x20mm)"
   description: "A 10x20mm caseless machine pistol magazine."

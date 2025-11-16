@@ -85,7 +85,7 @@
     multiplier: 1
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineSMG90
   name: "SMG-90 submachine gun magazine (10x20mm)"
   description: "A 10x20mm caseless submachine gun magazine."

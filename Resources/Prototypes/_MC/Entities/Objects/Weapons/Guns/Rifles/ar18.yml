@@ -98,7 +98,7 @@
       rmc-aslot-underbarrel: 0.28, -0.31
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineRifleAR18
   name: AR-18 magazine (10x24mm)
   description: A 10mm carbine magazine.
@@ -125,7 +125,7 @@
   - type: Appearance
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineRifleAR18AP
   name: AR-18 AP magazine (10x24mm)
   description: A 10mm assault carbine magazine, loaded with light armor piercing rounds.

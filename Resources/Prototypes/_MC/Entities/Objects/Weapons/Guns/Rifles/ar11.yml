@@ -82,7 +82,7 @@
       rmc-aslot-underbarrel: 0.28, -0.36
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineRifleAR11
   name: AR-11 combat rifle magazine
   description: A magazine filled with 4.92×34mm rifle rounds for the AR-11.

@@ -100,7 +100,7 @@
     multiplier: 1
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineSMG45
   name: "SMG-45 magazine (.41 AE)"
   description: "A .41 AE caseless submachinegun magazine."
@@ -131,7 +131,7 @@
   - type: Appearance
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineSMG45SH
   name: "SMG-45 squash-head magazine (.41 AE)"
   description: "A .41 AE caseless submachinegun magazine that does a minituare explosion upon contact, will shred the armor off of basically anything."

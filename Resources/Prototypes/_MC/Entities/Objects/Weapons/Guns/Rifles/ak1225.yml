@@ -82,7 +82,7 @@
       rmc-aslot-underbarrel: 0.28, -0.36
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineRifleAK1225
   name: AK1225 asoult rifle magazine
   description: A magazine filled with 5.45x39mm rifle rounds for the AR-11.

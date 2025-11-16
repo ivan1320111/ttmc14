@@ -94,7 +94,7 @@
     aimFireModifier: 0.7
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineDMR37
   description: A 10mm DMR magazine.
   name: "DMR-37 magazine (10x27mm)"

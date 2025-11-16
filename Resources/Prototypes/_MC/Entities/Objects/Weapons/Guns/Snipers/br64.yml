@@ -98,7 +98,7 @@
     aimFireModifier: 0.6
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineBR64
   name: "BR-64 magazine (10x26.5mm)"
   components:

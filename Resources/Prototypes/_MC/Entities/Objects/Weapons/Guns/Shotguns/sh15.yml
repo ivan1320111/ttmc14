@@ -86,7 +86,7 @@
       rmc-aslot-underbarrel: 0.3, -0.34
 
 - type: entity
-  parent: CMMagazineRifleBase
+  parent: MCMagazineRifle
   id: MCMagazineShotgunSH15
   abstract: true
   components:
