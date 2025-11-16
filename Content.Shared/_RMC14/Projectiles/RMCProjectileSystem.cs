@@ -117,7 +117,7 @@ public sealed class RMCProjectileSystem : EntitySystem
 
     private void OnProjectileAccuracyMapInit(Entity<RMCProjectileAccuracyComponent> projectile, ref MapInitEvent args)
     {
-        projectile.Comp.ShotFrom = _transform.GetMoverCoordinates(projectile.Owner);
+        projectile.Comp.ShotFrom = _transform.GetWorldPosition(projectile.Owner);
         projectile.Comp.Tick = _timing.CurTick.Value;
 
         Dirty(projectile);
@@ -138,8 +138,8 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
 
         var accuracy = projectile.Comp.Accuracy;
-        var targetCoords = _transform.GetMoverCoordinates(args.OtherEntity);
-        var distance = (targetCoords.Position - projectile.Comp.ShotFrom.Value.Position).Length();
+        var targetCoords = _transform.GetWorldPosition(args.OtherEntity);
+        var distance = (targetCoords - projectile.Comp.ShotFrom.Value).Length();
 
         foreach (var threshold in projectile.Comp.Thresholds)
         {
