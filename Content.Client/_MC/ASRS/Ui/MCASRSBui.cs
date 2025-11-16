@@ -46,7 +46,7 @@ public sealed class MCASRSBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         foreach (var entry in category.Entries)
         {
             var categoryButton = new MCASRSOrderButton();
-            categoryButton.OrderNameLabel.SetMessage(entry.Name ?? "Unknown");
+            categoryButton.OrderNameLabel.SetMessage($"{entry.Name ?? "Unknown"} ({entry.Cost})");
 
             view.Container.Children.Add(categoryButton);
         }

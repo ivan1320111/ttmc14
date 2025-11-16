@@ -3,9 +3,16 @@
     xmlns:ui="clr-namespace:Content.Client._MC.ASRS.Ui"
     Orientation="Horizontal">
 
-    <Button Text="-" Access="Public" StyleClasses="ButtonSquare" />
-    <RichTextLabel Text="0" Access="Public" />
-    <Button Text="+" Access="Public" StyleClasses="ButtonSquare" />
+    <BoxContainer Orientation="Horizontal" Margin="0 0 16">
+        <Button Text="-" Name="RemoveSingleButton" Access="Public" StyleClasses="ButtonSquare" />
+        <Label Text="0"
+               Name="CountLabel"
+               MinWidth="20"
+               Align="Center"
+               Access="Public" />
+        <Button Text="+" Name="AddSingleButton" Access="Public" StyleClasses="ButtonSquare" />
+    </BoxContainer>
+
     <RichTextLabel Name="OrderNameLabel" Access="Public" />
 
 </ui:MCASRSOrderButton>

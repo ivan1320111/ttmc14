@@ -17,10 +17,10 @@
 
                 <cc:HSeparator />
 
-                <LineEdit PlaceHolder="Search..." Name="SearchBar" HorizontalExpand="True" Margin="4 8" />
+                <LineEdit PlaceHolder="Search..." Name="SearchBar" HorizontalExpand="True" Margin="8 8" />
 
                 <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                    <BoxContainer Orientation="Vertical" Name="Container" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
+                    <BoxContainer Orientation="Vertical" Name="Container" Access="Public" HorizontalExpand="True" VerticalExpand="True" Margin="8"/>
                 </ScrollContainer>
             </BoxContainer>
         </PanelContainer>

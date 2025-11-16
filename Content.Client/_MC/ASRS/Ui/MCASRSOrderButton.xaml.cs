@@ -7,8 +7,24 @@ namespace Content.Client._MC.ASRS.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class MCASRSOrderButton : BoxContainer
 {
+    public int Count { get; private set; }
+
     public MCASRSOrderButton()
     {
         RobustXamlLoader.Load(this);
+
+        RemoveSingleButton.OnPressed += _ => AdjustCount(-1);
+        AddSingleButton.OnPressed += _ => AdjustCount(1);
+    }
+
+    public void AdjustCount(int count)
+    {
+        SetCount(Count + count);
+    }
+
+    public void SetCount(int count)
+    {
+        Count = Math.Max(count, 0);
+        CountLabel.Text = Count.ToString();
     }
 }
