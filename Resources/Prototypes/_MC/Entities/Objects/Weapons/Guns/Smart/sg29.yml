@@ -99,9 +99,11 @@
           tags:
           - MCAttachmentMuzzleSG29
       mc-slot-stock:
+        locked: true
+        startingAttachable: MCAttachmentStockSG29
         whitelist:
           tags:
-          - MCAttachmentVerticalGrip
+          - MCAttachmentStockSG29
       mc-slot-underbarrel:
         whitelist:
           tags:
