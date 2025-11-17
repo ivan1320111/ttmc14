@@ -99,11 +99,9 @@
           tags:
           - MCAttachmentMuzzleSG29
       mc-slot-stock:
-        locked: true
-        startingAttachable: MCAttachmentStockSG29
         whitelist:
           tags:
-          - MCAttachmentStockSG29
+          - MCAttachmentVerticalGrip
       mc-slot-underbarrel:
         whitelist:
           tags:
@@ -151,6 +149,29 @@
 - type: Tag
   id: MCAttachmentStockSG29
 
+# Boxes SG-62
+- type: entity
+  parent: MCBoxBullets
+  id: MCBoxBulletsSmartGunSG29
+  name: SG-29 & SG-25 smartrifle ammo box
+  description: A box containing 400 rounds of 10x26mm 'HP' caseless tuned for a smartgun.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#ffc000"
+  - type: BulletBox
+    bulletType: MCBoxBulletsSmartGunSG29
+    amount: 400
+    max: 400
+
 # Magazine
 - type: entity
   parent: MCMagazineRifle
@@ -176,6 +197,8 @@
       - MCCartridgeSmartGunSG29
     proto: MCCartridgeSmartGunSG29
     capacity: 250
+  - type: RefillableByBulletBox
+    bulletType: MCBoxBulletsSmartGunSG29
 
 - type: Tag
   id: MCMagazineSmartGunSG29
