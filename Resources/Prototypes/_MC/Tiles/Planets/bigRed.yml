@@ -1,10 +1,48 @@
 - type: tile
   parent: CMPlanetBase
   id: MCPlanetMarsSand
-  name: tiles-mc-sand
+  name: tiles-mc-mars-sand
   weedsSpreadable: true
   semiWeedable: true
-  sprite: /Textures/_MC/Tiles/Planet/BigRed/mars_sand.png
+  sprite: /Textures/_MC/Tiles/Planet/BigRed/Sand/sand.png
+  minimapColor: "#aa5f44cc"
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: MCPlanetMarsCave
+  name: tiles-mc-mars-cave
+  weedsSpreadable: true
+  semiWeedable: true
+  sprite: /Textures/_MC/Tiles/Planet/BigRed/Cave/cave.png
+  minimapColor: "#aa5f44cc"
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: MCPlanetMarsDirt
+  name: tiles-mc-mars-dirt
+  weedsSpreadable: true
+  semiWeedable: true
+  sprite: /Textures/_MC/Tiles/Planet/BigRed/Dirt/dirt.png
   minimapColor: "#aa5f44cc"
   variants: 8
   placementVariants:
