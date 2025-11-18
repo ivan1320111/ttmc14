@@ -190,8 +190,8 @@
     sprite: _MC/Structures/Xeno/Weeds/green.rsi
   - type: XenoWeeds
     spawns: MCXenoWeedsSticky
-    speedMultiplierOutsider: 0.333
-    speedMultiplierOutsiderArmor: 0.333
+    speedMultiplierOutsider: 0.6
+    speedMultiplierOutsiderArmor: 0.6
 
 - type: entity
   parent: MCXenoWeedsNodeBase
@@ -201,8 +201,8 @@
     sprite: _MC/Structures/Xeno/Weeds/green.rsi
   - type: XenoWeeds
     spawns: MCXenoWeedsSticky
-    speedMultiplierOutsider: 0.333
-    speedMultiplierOutsiderArmor: 0.333
+    speedMultiplierOutsider: 0.6
+    speedMultiplierOutsiderArmor: 0.6
 
 - type: entity
   parent: MCXenoWeedsBase
