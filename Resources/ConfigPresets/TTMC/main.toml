@@ -1,5 +1,5 @@
 [mc.round_schedule]
-enabled = true
+enabled = false
 timezone = "Russian Standard Time"
 update_frequency = 60
 days = "Friday,Saturday,Sunday"
