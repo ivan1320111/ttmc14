@@ -12,7 +12,7 @@
   - type: FixedIdentity
     name: mc-job-name-xeno-baneling
   - type: Xeno
-    tier: 0
+    tier: -1
     role: MCXenoMinionBaneling
     actionIds:
     - MCActionXenoRest

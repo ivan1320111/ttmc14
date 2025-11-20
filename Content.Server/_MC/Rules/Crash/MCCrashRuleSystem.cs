@@ -107,7 +107,7 @@ public sealed partial class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponen
             return;
         }
 
-        var totalXenos = _mcXenoHive.GetLiving(hive) + _mcXenoHive.GetBurrowedLarvaCount(hive);
+        var totalXenos = _mcXenoHive.GetLiving(hive, 0) + _mcXenoHive.GetBurrowedLarvaCount(hive);
         if (totalXenos >= 2)
             return;
 
@@ -119,7 +119,7 @@ public sealed partial class MCCrashRuleSystem : MCRuleSystem<MCCrashRuleComponen
         if (_mcXenoHive.DefaultHive is not {} hive)
             return 0;
 
-        var totalXenos = _mcXenoHive.GetLiving(hive) + _mcXenoHive.GetBurrowedLarvaCount(hive);
+        var totalXenos = _mcXenoHive.GetLiving(hive, 0) + _mcXenoHive.GetBurrowedLarvaCount(hive);
         var marinePoints = GetLiving<MarineComponent>() * 3.25f;
         return marinePoints - totalXenos * 10;
     }

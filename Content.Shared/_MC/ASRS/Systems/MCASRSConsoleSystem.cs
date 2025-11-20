@@ -7,6 +7,8 @@ namespace Content.Shared._MC.ASRS.Systems;
 
 public sealed class MCASRSConsoleSystem : EntitySystem
 {
+    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = null!;
+
     [Dependency] private readonly SharedRankSystem _rmcRank = null!;
 
     public override void Initialize()
@@ -41,6 +43,8 @@ public sealed class MCASRSConsoleSystem : EntitySystem
 
         entity.Comp.Requests.Add(request);
         Dirty(entity);
+
+        _userInterface.SetUiState(entity.Owner, MCASRSConsoleUi.Key, new MCASRSConsoleBuiState(entity.Comp.Requests));
     }
 
     private string GetRequesterName(EntityUid userUid)
