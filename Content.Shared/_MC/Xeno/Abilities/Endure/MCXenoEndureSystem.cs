@@ -43,7 +43,7 @@ public sealed class MCXenoEndureSystem : MCXenoAbilitySystem
             if (_timing.CurTime < activeComponent.EndTime)
             {
                 var second = (int) double.Round((activeComponent.EndTime - _timing.CurTime).TotalSeconds);
-                if (second == activeComponent.LastShowedTime)
+                if (second >= activeComponent.LastShowedTime)
                     continue;
 
                 activeComponent.LastShowedTime = second;
