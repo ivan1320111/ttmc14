@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -14,6 +15,7 @@ public sealed class MCXenoEndureSystem : MCXenoAbilitySystem
 {
     [Dependency] private readonly INetManager _net = null!;
     [Dependency] private readonly IGameTiming _timing = null!;
+    [Dependency] private readonly SharedPopupSystem _popup = null!;
     [Dependency] private readonly MobStateSystem _mobState = null!;
     [Dependency] private readonly SharedAuraSystem _rmcAura = null!;
     [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = null!;
@@ -39,7 +41,18 @@ public sealed class MCXenoEndureSystem : MCXenoAbilitySystem
         while (query.MoveNext(out var uid, out var activeComponent))
         {
             if (_timing.CurTime < activeComponent.EndTime)
+            {
+                var second = (int) double.Round((activeComponent.EndTime - _timing.CurTime).TotalSeconds);
+                if (second == activeComponent.LastShowedTime)
+                    continue;
+
+                activeComponent.LastShowedTime = second;
+
+                if (_net.IsServer)
+                    _popup.PopupEntity(second.ToString(), uid, uid, PopupType.MediumXeno);
+
                 continue;
+            }
 
             RemCompDeferred<MCXenoEndureActiveComponent>(uid);
         }
@@ -71,6 +84,9 @@ public sealed class MCXenoEndureSystem : MCXenoAbilitySystem
 
     private void OnActiveRemove(Entity<MCXenoEndureActiveComponent> entity, ref ComponentRemove args)
     {
+        if (_net.IsServer)
+            _popup.PopupEntity(Loc.GetString("mc-xeno-ability-endure-end"), entity, entity, PopupType.MediumXeno);
+
         _mobState.UpdateMobState(entity);
     }
 

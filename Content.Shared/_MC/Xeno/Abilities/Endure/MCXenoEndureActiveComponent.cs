@@ -7,4 +7,7 @@ public sealed partial class MCXenoEndureActiveComponent : Component
 {
     [DataField, AutoNetworkedField]
     public TimeSpan EndTime;
+
+    [DataField, AutoNetworkedField]
+    public int LastShowedTime;
 }
